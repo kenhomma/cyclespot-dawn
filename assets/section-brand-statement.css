@@ -1,0 +1,160 @@
+/* ==========================================================================
+   Brand Statement — 10の約束
+   ========================================================================== */
+
+.brand-statement {
+  padding: 6rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .brand-statement {
+    padding: 8rem 0;
+  }
+}
+
+/* ---------- Intro ---------- */
+.brand-statement__intro {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.brand-statement__kicker {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cs-color-text-light);
+  margin: 0 0 1.6rem;
+}
+
+.brand-statement__title {
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 0 0 1.6rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .brand-statement__title {
+    font-size: 4rem;
+  }
+}
+
+.brand-statement__title::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 1px;
+  background: var(--cs-color-text);
+  margin: 2rem auto 0;
+}
+
+.brand-statement__lead {
+  font-size: 1.8rem;
+  line-height: 1.8;
+  color: var(--cs-color-text);
+  margin: 2.4rem auto 0;
+  max-width: var(--cs-max-width-text);
+  font-weight: 400;
+}
+
+@media screen and (min-width: 750px) {
+  .brand-statement__lead {
+    font-size: 2.2rem;
+  }
+}
+
+/* ---------- Promise Items ---------- */
+.brand-statement__promises {
+  max-width: var(--cs-max-width-narrow);
+  margin: 0 auto;
+}
+
+.brand-statement__promise {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--cs-color-border);
+}
+
+.brand-statement__promise:last-child {
+  border-bottom: none;
+}
+
+.brand-statement__promise-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.brand-statement__promise-number {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--cs-color-accent);
+  white-space: nowrap;
+  min-width: 2.4rem;
+}
+
+.brand-statement__promise-title {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .brand-statement__promise-title {
+    font-size: 2.4rem;
+  }
+}
+
+.brand-statement__promise-body {
+  padding-left: 4rem;
+  font-size: 1.5rem;
+  line-height: 2;
+  color: var(--cs-color-text-muted);
+}
+
+@media screen and (min-width: 750px) {
+  .brand-statement__promise-body {
+    font-size: 1.6rem;
+  }
+}
+
+.brand-statement__promise-body p {
+  margin: 0 0 1rem;
+}
+
+.brand-statement__promise-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Closing ---------- */
+.brand-statement__closing {
+  text-align: center;
+  padding-top: 6rem;
+  border-top: 1px solid var(--cs-color-border);
+  margin-top: 2rem;
+}
+
+.brand-statement__closing-text {
+  font-size: 1.8rem;
+  line-height: 1.8;
+  color: var(--cs-color-text);
+  max-width: var(--cs-max-width-text);
+  margin: 0 auto 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .brand-statement__closing-text {
+    font-size: 2rem;
+  }
+}
+
+/* ---------- CTA ---------- */
+.brand-statement__cta {
+  text-align: center;
+  padding-top: 4rem;
+}

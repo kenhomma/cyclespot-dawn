@@ -1,0 +1,105 @@
+{{ 'section-main-blog-news.css' | asset_url | stylesheet_tag }}
+
+{%- paginate blog.articles by section.settings.articles_per_page -%}
+<section class="blog-news">
+  <div class="page-width">
+
+    {%- comment -%} ===== Intro ===== {%- endcomment -%}
+    <div class="blog-news__intro cs-fade-in">
+      {%- if section.settings.kicker != blank -%}
+        <p class="blog-news__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      <h1 class="blog-news__title">{{ blog.title | escape }}</h1>
+    </div>
+
+    {%- comment -%} ===== Tag Filter ===== {%- endcomment -%}
+    {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+      <div class="blog-news__tags">
+        <a
+          href="{{ blog.url }}"
+          class="blog-news__tag{% unless current_tags %} blog-news__tag--active{% endunless %}"
+        >
+          すべて
+        </a>
+        {%- for tag in blog.all_tags -%}
+          {%- if current_tags contains tag -%}
+            <a href="{{ blog.url }}" class="blog-news__tag blog-news__tag--active">{{ tag }}</a>
+          {%- else -%}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="blog-news__tag">{{ tag }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== Article List ===== {%- endcomment -%}
+    {%- if blog.articles_count > 0 -%}
+      <div class="blog-news__list cs-fade-in">
+        {%- for article in blog.articles -%}
+          <a href="{{ article.url }}" class="blog-news__item">
+            <time class="blog-news__item-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+              {{ article.published_at | date: '%Y.%m.%d' }}
+            </time>
+            <div class="blog-news__item-body">
+              {%- if article.tags.size > 0 -%}
+                <div class="blog-news__item-tags">
+                  {%- for tag in article.tags limit: 2 -%}
+                    <span class="blog-news__item-tag">{{ tag }}</span>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              <h2 class="blog-news__item-title">{{ article.title }}</h2>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <div class="blog-news__pagination">
+          {% render 'pagination', paginate: paginate %}
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <p class="blog-news__empty">{{ section.settings.empty_text | default: 'お知らせはまだありません。' }}</p>
+    {%- endif -%}
+
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "お知らせ一覧（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "キッカー",
+      "default": "NEWS"
+    },
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "label": "1ページあたりの記事数",
+      "min": 5,
+      "max": 30,
+      "step": 5,
+      "default": 15
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "タグフィルターを表示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "記事がない場合のテキスト",
+      "default": "お知らせはまだありません。"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Pickup Products — Vermicular-inspired product grid
+   ========================================================================== */
+
+.pickup-cs {
+  padding: var(--cs-spacing-section-mobile) 0;
+}
+
+@media screen and (min-width: 750px) {
+  .pickup-cs {
+    padding: var(--cs-spacing-section) 0;
+  }
+}
+
+.pickup-cs__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pickup-cs__grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.4rem;
+  }
+}
+
+/* Product card */
+.pickup-cs__card {
+  display: block;
+  text-decoration: none;
+  color: var(--cs-color-text);
+}
+
+.pickup-cs__card-image {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--cs-color-warm-bg);
+  margin-bottom: 1.4rem;
+}
+
+.pickup-cs__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+  transition: transform 0.6s ease;
+}
+
+.pickup-cs__card:hover .pickup-cs__card-img {
+  transform: scale(1.04);
+}
+
+.pickup-cs__card-vendor {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--cs-color-text-light);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.pickup-cs__card-title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: 0 0 0.6rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .pickup-cs__card-title {
+    font-size: 1.4rem;
+  }
+}
+
+.pickup-cs__card-price {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--cs-color-text);
+}
+
+.pickup-cs__card-price--compare {
+  text-decoration: line-through;
+  color: var(--cs-color-text-light);
+  margin-right: 0.6rem;
+  font-size: 1.2rem;
+}
+
+/* View all link */
+.pickup-cs__view-all {
+  text-align: center;
+  margin-top: 4rem;
+}

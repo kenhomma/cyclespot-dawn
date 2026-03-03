@@ -1,0 +1,155 @@
+{%- comment -%}
+  商品スペック表示スニペット
+  メタフィールド: specs.wheel_size, specs.gear, specs.brake, specs.highlights
+{%- endcomment -%}
+
+{%- assign wheel = product.metafields.specs.wheel_size.value -%}
+{%- assign gear = product.metafields.specs.gear.value -%}
+{%- assign brake = product.metafields.specs.brake.value -%}
+{%- assign highlights = product.metafields.specs.highlights.value -%}
+{%- assign subcategory = product.metafields.specs.subcategory.value -%}
+
+{%- if wheel != blank or gear != blank or brake != blank or highlights != blank -%}
+<div class="product-specs">
+  {%- comment -%} ===== 特徴（ハイライト） ===== {%- endcomment -%}
+  {%- if highlights != blank and highlights.size > 0 -%}
+  <div class="product-specs__highlights">
+    <h3 class="product-specs__heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+      特徴
+    </h3>
+    <ul class="product-specs__highlight-list">
+      {%- for item in highlights -%}
+        {%- if item != blank -%}
+        <li class="product-specs__highlight-item">{{ item }}</li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== スペック表 ===== {%- endcomment -%}
+  {%- if wheel != blank or gear != blank or brake != blank -%}
+  <div class="product-specs__table-wrap">
+    <h3 class="product-specs__heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+      スペック
+    </h3>
+    <table class="product-specs__table">
+      <tbody>
+        {%- if subcategory != blank -%}
+        <tr>
+          <th>カテゴリ</th>
+          <td>{{ product.type }}（{{ subcategory }}）</td>
+        </tr>
+        {%- elsif product.type != blank -%}
+        <tr>
+          <th>カテゴリ</th>
+          <td>{{ product.type }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if wheel != blank -%}
+        <tr>
+          <th>ホイールサイズ</th>
+          <td>{{ wheel }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if gear != blank -%}
+        <tr>
+          <th>変速</th>
+          <td>{{ gear }}</td>
+        </tr>
+        {%- endif -%}
+        {%- if brake != blank -%}
+        <tr>
+          <th>ブレーキ</th>
+          <td>{{ brake }}</td>
+        </tr>
+        {%- endif -%}
+      </tbody>
+    </table>
+  </div>
+  {%- endif -%}
+</div>
+
+<style>
+.product-specs {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 1.5rem;
+}
+.product-specs__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+}
+.product-specs__heading svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* Highlights */
+.product-specs__highlights {
+  margin-bottom: 1.5rem;
+}
+.product-specs__highlight-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.product-specs__highlight-item {
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #333;
+}
+.product-specs__highlight-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  background: #2c6e49;
+  border-radius: 50%;
+}
+
+/* Specs table */
+.product-specs__table-wrap {
+  margin-top: 1.5rem;
+}
+.product-specs__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.product-specs__table th,
+.product-specs__table td {
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.product-specs__table th {
+  width: 40%;
+  color: #666;
+  font-weight: 500;
+  background: rgba(0,0,0,0.02);
+}
+.product-specs__table td {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+.product-specs__table tr:last-child th,
+.product-specs__table tr:last-child td {
+  border-bottom: none;
+}
+</style>
+{%- endif -%}

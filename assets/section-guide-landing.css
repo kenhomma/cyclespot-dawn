@@ -1,0 +1,194 @@
+/* Guide / Support landing page */
+.guide-landing {
+  padding: 6rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .guide-landing {
+    padding: 8rem 0;
+  }
+}
+
+/* Intro — reuses about-company styles */
+.guide-landing__intro {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.guide-landing__kicker {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cs-color-text-light);
+  margin: 0 0 1.6rem;
+}
+
+.guide-landing__title {
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 0 0 1.6rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .guide-landing__title {
+    font-size: 4rem;
+  }
+}
+
+.guide-landing__title::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 1px;
+  background: var(--cs-color-text);
+  margin: 2rem auto 0;
+}
+
+.guide-landing__lead {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 2rem auto 0;
+  max-width: var(--cs-max-width-text);
+}
+
+/* Guide cards */
+.guide-landing__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .guide-landing__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.6rem;
+  }
+}
+
+.guide-landing__card {
+  text-align: center;
+}
+
+.guide-landing__card-image {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  border-radius: 4px;
+}
+
+.guide-landing__card-image--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cs-color-warm-bg-alt);
+}
+
+.guide-landing__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.guide-landing__card:hover .guide-landing__card-img {
+  transform: scale(1.03);
+}
+
+.guide-landing__card-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0 0 1.2rem;
+  color: var(--cs-color-text);
+}
+
+.guide-landing__card-text {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 0 0 1.6rem;
+}
+
+/* Policy section */
+.guide-landing__policy-section {
+  max-width: var(--cs-max-width-narrow);
+  margin: 0 auto 6rem;
+}
+
+.guide-landing__policies {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .guide-landing__policies {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+}
+
+.guide-landing__policy-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0 0 1rem;
+  color: var(--cs-color-text);
+}
+
+.guide-landing__policy-text {
+  font-size: 1.4rem;
+  line-height: 1.9;
+  color: var(--cs-color-text-muted);
+  margin: 0;
+}
+
+/* FAQ section */
+.guide-landing__faq-section {
+  max-width: var(--cs-max-width-narrow);
+  margin: 0 auto;
+}
+
+.guide-landing__faq {
+  border-top: 1px solid var(--cs-color-border);
+}
+
+.guide-landing__faq-item {
+  border-bottom: 1px solid var(--cs-color-border);
+}
+
+.guide-landing__faq-question {
+  padding: 2rem 0;
+  font-size: 1.6rem;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--cs-color-text);
+}
+
+.guide-landing__faq-question::after {
+  content: '+';
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--cs-color-text-light);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  margin-left: 2rem;
+}
+
+.guide-landing__faq-item[open] .guide-landing__faq-question::after {
+  content: '\2212';
+}
+
+.guide-landing__faq-answer {
+  padding: 0 0 2rem;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+}

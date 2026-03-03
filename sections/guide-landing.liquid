@@ -1,0 +1,264 @@
+{{ 'section-guide-landing.css' | asset_url | stylesheet_tag }}
+
+<section class="guide-landing">
+  <div class="page-width">
+    {%- comment -%} ===== イントロ ===== {%- endcomment -%}
+    <div class="guide-landing__intro cs-fade-in">
+      {%- if section.settings.kicker != blank -%}
+        <p class="guide-landing__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      <h1 class="guide-landing__title">{{ section.settings.title | default: '選び方・安心サポート' }}</h1>
+      {%- if section.settings.lead != blank -%}
+        <p class="guide-landing__lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== ガイドカード ===== {%- endcomment -%}
+    {%- assign guide_blocks = section.blocks | where: 'type', 'guide_card' -%}
+    {%- if guide_blocks.size > 0 -%}
+      <div class="guide-landing__grid cs-fade-in cs-fade-in--stagger">
+        {%- for block in guide_blocks -%}
+          <div class="guide-landing__card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="guide-landing__card-image">
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 450, 600',
+                    sizes: '(min-width: 750px) 50vw, 100vw',
+                    class: 'guide-landing__card-img'
+                }}
+              </div>
+            {%- else -%}
+              <div class="guide-landing__card-image guide-landing__card-image--placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.3"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              </div>
+            {%- endif -%}
+            <h3 class="guide-landing__card-title">{{ block.settings.title }}</h3>
+            <p class="guide-landing__card-text">{{ block.settings.text }}</p>
+            {%- if block.settings.link_label != blank -%}
+              <a href="{{ block.settings.link }}" class="cs-btn--text">
+                {{ block.settings.link_label }}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== 安心サポートポリシー ===== {%- endcomment -%}
+    {%- assign policy_blocks = section.blocks | where: 'type', 'policy' -%}
+    {%- if policy_blocks.size > 0 -%}
+      <div class="guide-landing__policy-section cs-fade-in">
+        <h2 class="about-company__section-title">{{ section.settings.policy_heading | default: '安心サポートポリシー' }}</h2>
+        <div class="guide-landing__policies">
+          {%- for block in policy_blocks -%}
+            <div class="guide-landing__policy" {{ block.shopify_attributes }}>
+              <h3 class="guide-landing__policy-title">{{ block.settings.title }}</h3>
+              <p class="guide-landing__policy-text">{{ block.settings.text }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== FAQ ===== {%- endcomment -%}
+    {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
+    {%- if faq_blocks.size > 0 -%}
+      <div class="guide-landing__faq-section cs-fade-in">
+        <h2 class="about-company__section-title">{{ section.settings.faq_heading | default: 'よくある質問' }}</h2>
+        <div class="guide-landing__faq">
+          {%- for block in faq_blocks -%}
+            <details class="guide-landing__faq-item" {{ block.shopify_attributes }}>
+              <summary class="guide-landing__faq-question">{{ block.settings.question }}</summary>
+              <div class="guide-landing__faq-answer rte">{{ block.settings.answer }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "選び方ガイド（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "キッカー",
+      "default": "GUIDE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル",
+      "default": "選び方・安心サポート"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "リード文",
+      "default": "初めての自転車選びでも安心。用途・ライフステージに合わせて、スタッフが一緒に答えを出します。"
+    },
+    {
+      "type": "text",
+      "id": "policy_heading",
+      "label": "ポリシーセクション見出し",
+      "default": "安心サポートポリシー"
+    },
+    {
+      "type": "text",
+      "id": "faq_heading",
+      "label": "FAQセクション見出し",
+      "default": "よくある質問"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "guide_card",
+      "name": "ガイドカード",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "画像"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル",
+          "default": "通勤・通学の一台"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明文",
+          "default": "毎日の移動がもっと快適に。軽さ・速さ・防犯性から選ぶコツをご紹介。"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "リンクラベル"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "リンク先"
+        }
+      ]
+    },
+    {
+      "type": "policy",
+      "name": "ポリシー",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル",
+          "default": "1台1台に責任を"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "テキスト",
+          "default": "修理は命に関わる仕事です。だからこそ、一台一台を丁寧に仕上げ、安心してお乗りいただける状態でお渡しします。"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "質問",
+          "default": "他店で購入した自転車も修理できますか？"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "回答",
+          "default": "<p>はい、他店でご購入の自転車も修理いたします。お気軽にお持ちください。</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "選び方ガイド（CS）",
+      "blocks": [
+        {
+          "type": "guide_card",
+          "settings": {
+            "title": "通勤・通学",
+            "text": "毎日の移動がもっと快適に。軽さ・速さ・防犯性から選ぶコツをご紹介。"
+          }
+        },
+        {
+          "type": "guide_card",
+          "settings": {
+            "title": "子ども乗せ",
+            "text": "前乗せ・後ろ乗せの違い、安全基準、電動アシストの選び方など。"
+          }
+        },
+        {
+          "type": "guide_card",
+          "settings": {
+            "title": "シニア・久しぶりの自転車",
+            "text": "安定性・乗り降りのしやすさ・電動アシストの活用法をご案内。"
+          }
+        },
+        {
+          "type": "guide_card",
+          "settings": {
+            "title": "趣味・スポーツライド",
+            "text": "クロスバイク、ロードバイク、マウンテンバイク。目的に合った一台を。"
+          }
+        },
+        {
+          "type": "policy",
+          "settings": {
+            "title": "1台1台に責任を",
+            "text": "修理は命に関わる仕事です。だからこそ、一台一台を丁寧に仕上げ、安心してお乗りいただける状態でお渡しします。"
+          }
+        },
+        {
+          "type": "policy",
+          "settings": {
+            "title": "他店購入車も歓迎",
+            "text": "サイクルスポット以外でご購入の自転車も、修理・メンテナンスを承ります。お気軽にお持ちください。"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "空気入れだけでもいいですか？",
+            "answer": "<p>もちろんです。空気入れは無料で、どなたでもご利用いただけます。お気軽にお立ち寄りください。</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "購入後の保証はありますか？",
+            "answer": "<p>ご購入いただいた自転車には、メーカー保証に加え、サイクルスポット独自の安心サポートをご用意しています。詳しくは店頭スタッフにお尋ねください。</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "子ども用自転車のサイズはどう選べばいいですか？",
+            "answer": "<p>お子さまの身長・年齢に合わせたサイズ目安表をご用意しています。また、店頭でのフィッティングも無料で承りますので、ぜひ実物をお試しください。</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

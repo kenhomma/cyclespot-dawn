@@ -1,0 +1,123 @@
+/* Hero section — Vermicular-inspired full bleed */
+.section--hero-cs {
+  margin-top: 0 !important;
+}
+
+.hero-cs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--hero-height, 85vh);
+  overflow: hidden;
+}
+
+/* Background image */
+.hero-cs__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-cs__media--placeholder {
+  background: linear-gradient(135deg, #3a3a3a 0%, #5a5a5a 100%);
+}
+
+.hero-cs__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-cs__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--hero-overlay, 0.25));
+}
+
+/* Content */
+.hero-cs__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--hero-height, 85vh);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.hero-cs__text {
+  text-align: center;
+  color: #fff;
+  max-width: 68rem;
+}
+
+/* Kicker */
+.hero-cs__kicker {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+}
+
+@media screen and (min-width: 750px) {
+  .hero-cs__kicker {
+    font-size: 1.3rem;
+    margin-bottom: 2.4rem;
+  }
+}
+
+/* Heading */
+.hero-cs__heading {
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  margin: 0 0 2rem;
+  white-space: pre-line;
+}
+
+@media screen and (min-width: 750px) {
+  .hero-cs__heading {
+    font-size: 4rem;
+    line-height: 1.45;
+    margin-bottom: 2.4rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hero-cs__heading {
+    font-size: 4.8rem;
+  }
+}
+
+/* Subheading */
+.hero-cs__subheading {
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  margin: 0 0 3.6rem;
+  opacity: 0.9;
+  white-space: pre-line;
+}
+
+@media screen and (min-width: 750px) {
+  .hero-cs__subheading {
+    font-size: 1.6rem;
+    margin-bottom: 4rem;
+  }
+}
+
+/* Buttons */
+.hero-cs__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+}

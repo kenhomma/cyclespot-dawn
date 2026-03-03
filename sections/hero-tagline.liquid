@@ -1,0 +1,239 @@
+{{ 'section-hero-tagline.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Hero Tagline — タイピングアニメーション付きヒーロー
+  PC: 左テキスト / 右写真のスプリットレイアウト
+  SP: 写真上 / テキスト下のスタック
+{%- endcomment -%}
+
+{%- comment -%} フレーズブロックからテキスト配列を生成 {%- endcomment -%}
+{%- assign phrase_blocks = section.blocks | where: 'type', 'phrase' -%}
+{%- capture phrases_json -%}
+[
+  {%- for block in phrase_blocks -%}
+    {{ block.settings.text | json }}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]
+{%- endcapture -%}
+
+<section class="hero-tl" data-hero-tagline data-phrases="{{ phrases_json | escape }}">
+  <div class="hero-tl__inner">
+    {%- comment -%} ===== Left: Text ===== {%- endcomment -%}
+    <div class="hero-tl__text cs-fade-in">
+      <div class="hero-tl__text-inner">
+        <h1 class="hero-tl__tagline">{{ section.settings.tagline | default: 'できるかぎり、できることを。' }}</h1>
+
+        {%- if section.settings.subcopy != blank -%}
+          <p class="hero-tl__subcopy">{{ section.settings.subcopy }}</p>
+        {%- endif -%}
+
+        {%- if phrase_blocks.size > 0 -%}
+          <div class="hero-tl__typing-area">
+            {%- if section.settings.typing_label != blank -%}
+              <p class="hero-tl__typing-label">{{ section.settings.typing_label }}</p>
+            {%- endif -%}
+            <div class="hero-tl__typing-text">
+              <span data-typing-text></span><span class="hero-tl__cursor" data-typing-cursor></span>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} CTA buttons {%- endcomment -%}
+        {%- assign button_block = section.blocks | where: 'type', 'buttons' | first -%}
+        {%- if button_block -%}
+          <div class="hero-tl__buttons">
+            {%- if button_block.settings.button_label_1 != blank -%}
+              <a href="{{ button_block.settings.button_link_1 }}" class="cs-btn cs-btn--primary">
+                {{ button_block.settings.button_label_1 }}
+              </a>
+            {%- endif -%}
+            {%- if button_block.settings.button_label_2 != blank -%}
+              <a href="{{ button_block.settings.button_link_2 }}" class="cs-btn cs-btn--secondary">
+                {{ button_block.settings.button_label_2 }}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} ===== Right: Image ===== {%- endcomment -%}
+    <div class="hero-tl__media">
+      {%- if phrase_blocks.size > 0 -%}
+        {%- for block in phrase_blocks -%}
+          <div class="hero-tl__slide{% if forloop.first %} is-active{% endif %}" data-slide {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'eager',
+                  fetchpriority: forloop.first | ternary: 'high', 'low',
+                  widths: '375, 750, 1000, 1200',
+                  sizes: '(min-width: 990px) 50vw, 100vw',
+                  class: 'hero-tl__slide-img'
+              }}
+            {%- else -%}
+              <div class="hero-tl__media-placeholder">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+
+        {%- if phrase_blocks.size > 1 -%}
+          <div class="hero-tl__dots">
+            {%- for block in phrase_blocks -%}
+              <button class="hero-tl__dot{% if forloop.first %} is-active{% endif %}" data-dot aria-label="スライド {{ forloop.index }}"></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        {%- comment -%} フォールバック: section設定画像 or プレースホルダー {%- endcomment -%}
+        {%- if section.settings.fallback_image != blank -%}
+          <div class="hero-tl__slide is-active" data-slide>
+            {{
+              section.settings.fallback_image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'eager',
+                fetchpriority: 'high',
+                widths: '375, 750, 1000, 1200',
+                sizes: '(min-width: 990px) 50vw, 100vw',
+                class: 'hero-tl__slide-img'
+            }}
+          </div>
+        {%- else -%}
+          <div class="hero-tl__slide is-active" data-slide>
+            <div class="hero-tl__media-placeholder">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'hero-tagline.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "ヒーロータグライン（CS）",
+  "tag": "section",
+  "class": "section--hero-tagline",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "メインタグライン",
+      "default": "できるかぎり、できることを。"
+    },
+    {
+      "type": "textarea",
+      "id": "subcopy",
+      "label": "サブコピー",
+      "default": "街の自転車屋として、暮らしのそばで走り続ける。\n首都圏100店舗以上のサイクルスポットです。"
+    },
+    {
+      "type": "text",
+      "id": "typing_label",
+      "label": "タイピングラベル（小見出し）",
+      "default": "CYCLESPOT IS"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "フォールバック画像（フレーズ未設定時）"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "phrase",
+      "name": "フレーズ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "タイピングテキスト",
+          "default": "パンク修理も、空気入れも、断りません。"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "対応画像"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "CTAボタン",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "label": "ボタン1ラベル",
+          "default": "自転車を探す"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "ボタン1リンク"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "ボタン2ラベル",
+          "default": "お近くの店舗を探す"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "ボタン2リンク"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ヒーロータグライン（CS）",
+      "blocks": [
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "パンク修理も、空気入れも、断りません。"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "100店舗の整備士が、1台1台に向き合っています。"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "オンラインで選んで、近くの店舗で受け取れます。"
+          }
+        },
+        {
+          "type": "phrase",
+          "settings": {
+            "text": "はじめての方も、気軽に立ち寄れるお店です。"
+          }
+        },
+        {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "自転車を探す",
+            "button_link_1": "/collections",
+            "button_label_2": "お近くの店舗を探す",
+            "button_link_2": "/pages/stores"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

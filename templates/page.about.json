@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "main": {
+      "type": "about-company",
+      "blocks": {
+        "vision": {
+          "type": "vision",
+          "settings": {
+            "heading": "ビジョン",
+            "purpose": "すべては「ありがとう」のために",
+            "mission": "自転車を通じて、人と街の暮らしを豊かにする",
+            "vision": "首都圏の街のインフラとして、いつでも頼れる自転車屋であり続ける",
+            "values": "断らない、寄りそう、手を動かす、チームで助け合う"
+          }
+        },
+        "overview": {
+          "type": "overview",
+          "settings": {
+            "heading": "会社概要",
+            "company_name": "株式会社サイクルスポット",
+            "stores_count": "100店舗以上（首都圏）",
+            "business": "自転車の販売・修理・メンテナンス、ECサイト運営"
+          }
+        },
+        "brand": {
+          "type": "richtext",
+          "settings": {
+            "heading": "ブランドステートメント",
+            "body": "<p>「すべては『ありがとう』のために」—— 私たちサイクルスポットは、この言葉を原点に、首都圏100店舗以上の「街の自転車屋さん」として歩んできました。</p><p>自転車は、通勤通学、子育て、お買い物、趣味のライドまで、あらゆる暮らしのパートナーです。だからこそ私たちは、一台一台に責任を持ち、お客様一人ひとりに寄りそい、「断らない」姿勢を貫いています。</p>"
+          }
+        },
+        "cta": {
+          "type": "cta_banner",
+          "settings": {
+            "heading": "一緒に働きませんか？",
+            "text": "街の自転車屋として、人の役に立つ仕事を一緒に。",
+            "button_label": "採用情報を見る",
+            "button_link": "/pages/careers"
+          }
+        }
+      },
+      "block_order": ["vision", "overview", "brand", "cta"],
+      "settings": {
+        "kicker": "ABOUT",
+        "title": "企業・ブランド情報"
+      }
+    }
+  },
+  "order": ["main"]
+}

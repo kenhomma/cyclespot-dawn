@@ -1,0 +1,153 @@
+{{ 'section-brand-statement.css' | asset_url | stylesheet_tag }}
+
+<section class="brand-statement">
+  <div class="page-width">
+
+    {%- comment -%} ===== Intro ===== {%- endcomment -%}
+    <div class="brand-statement__intro cs-fade-in">
+      {%- if section.settings.kicker != blank -%}
+        <p class="brand-statement__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      <h1 class="brand-statement__title">{{ section.settings.title | default: '10の約束' }}</h1>
+      {%- if section.settings.lead != blank -%}
+        <p class="brand-statement__lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== Promise Items ===== {%- endcomment -%}
+    {%- assign promise_blocks = section.blocks | where: 'type', 'promise' -%}
+    {%- if promise_blocks.size > 0 -%}
+      <div class="brand-statement__promises cs-fade-in cs-fade-in--stagger">
+        {%- for block in promise_blocks -%}
+          <div class="brand-statement__promise" {{ block.shopify_attributes }}>
+            <div class="brand-statement__promise-header">
+              <span class="brand-statement__promise-number">{{ forloop.index }}.</span>
+              <h2 class="brand-statement__promise-title">{{ block.settings.title }}</h2>
+            </div>
+            {%- if block.settings.body != blank -%}
+              <div class="brand-statement__promise-body rte">
+                {{ block.settings.body }}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== Closing ===== {%- endcomment -%}
+    {%- if section.settings.closing_text != blank -%}
+      <div class="brand-statement__closing cs-fade-in">
+        <p class="brand-statement__closing-text">{{ section.settings.closing_text }}</p>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== CTA ===== {%- endcomment -%}
+    {%- if section.settings.cta_label != blank -%}
+      <div class="brand-statement__cta cs-fade-in">
+        <a href="{{ section.settings.cta_link }}" class="cs-btn cs-btn--secondary">
+          {{ section.settings.cta_label }}
+        </a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "10の約束（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "キッカー",
+      "default": "BRAND STATEMENT"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル",
+      "default": "10の約束"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "リード文",
+      "default": "すばらしい乗り物である自転車を通じて、人と社会に笑顔を。"
+    },
+    {
+      "type": "header",
+      "content": "クロージング"
+    },
+    {
+      "type": "textarea",
+      "id": "closing_text",
+      "label": "まとめテキスト"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTAボタンラベル",
+      "default": "ストーリーを読む"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTAボタンリンク"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promise",
+      "name": "約束",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル",
+          "default": "約束のタイトル"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "本文"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "10の約束（CS）",
+      "blocks": [
+        {
+          "type": "promise",
+          "settings": {
+            "title": "自転車の力を信じている",
+            "body": "<p>ペダルを踏めば前に進む。風を切ってどこまでも行ける。私たちは、自転車という乗り物が持つそのシンプルな力を信じています。</p>"
+          }
+        },
+        {
+          "type": "promise",
+          "settings": {
+            "title": "1台1台に責任を",
+            "body": "<p>自転車はお客様の命を乗せています。だからこそ、整備も修理も一台一台に責任を持って。「これで安心して乗っていただけます」と言えるまで、私たちは手を抜きません。</p>"
+          }
+        },
+        {
+          "type": "promise",
+          "settings": {
+            "title": "笑顔とあいさつから始めます",
+            "body": "<p>自転車の修理も、接客も、最初は「こんにちは」から。お客様が少しホッとするような笑顔、「このお店なら大丈夫」と思える空気をつくることが、最初の仕事です。</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

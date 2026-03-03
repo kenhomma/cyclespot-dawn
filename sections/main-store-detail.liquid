@@ -1,0 +1,266 @@
+{{ 'section-store-detail.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- comment -%}
+  メタオブジェクトテンプレート用の店舗詳細セクション。
+  Shopify が metaobject 変数として渡す → store にエイリアス。
+  URL: /stores/{handle}
+{%- endcomment -%}
+
+{%- assign store = metaobject -%}
+
+{%- if store == blank -%}
+  <div class="page-width section-{{ section.id }}-padding">
+    <p>店舗情報が見つかりませんでした。</p>
+    <a href="/pages/stores" class="button">店舗一覧に戻る</a>
+  </div>
+{%- else -%}
+
+<div class="page-width section-{{ section.id }}-padding">
+
+  {%- comment -%} ===== 1. ヘッダーエリア ===== {%- endcomment -%}
+  <div class="store-detail__header">
+    <div class="store-detail__header-top">
+      {%- if store.type == 'le_cyc' -%}
+        <span class="store-detail__badge store-detail__badge--lecyc">ル・サイク</span>
+      {%- else -%}
+        <span class="store-detail__badge store-detail__badge--cyclespot">サイクルスポット</span>
+      {%- endif -%}
+
+      {%- if store.regular_holiday == '無休' -%}
+        <span class="store-detail__status store-detail__status--open">年中無休</span>
+      {%- endif -%}
+    </div>
+    <h1 class="store-detail__name h1">{{ store.name }}</h1>
+  </div>
+
+  {%- comment -%} ===== 2. 基本情報 + アクセス ===== {%- endcomment -%}
+  <div class="store-detail__info-grid">
+    <div class="store-detail__info-main">
+      <table class="store-detail__info-table">
+        <tr>
+          <th>住所</th>
+          <td>{{ store.address }}</td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td><a href="tel:{{ store.phone | remove: '-' }}">{{ store.phone }}</a></td>
+        </tr>
+        <tr>
+          <th>営業時間</th>
+          <td>{{ store.opening_hours }}</td>
+        </tr>
+        <tr>
+          <th>定休日</th>
+          <td>{{ store.regular_holiday | default: '無休' }}</td>
+        </tr>
+      </table>
+
+      {%- if store.gmb_url != blank -%}
+        <a href="{{ store.gmb_url }}" target="_blank" rel="noopener" class="store-detail__map-link button button--secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Google マップで見る
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="store-detail__map">
+      {%- if store.latitude != blank and store.longitude != blank -%}
+        <iframe
+          src="https://maps.google.com/maps?q={{ store.latitude }},{{ store.longitude }}&z=16&output=embed"
+          width="100%"
+          height="300"
+          style="border:0; border-radius: 8px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} ===== 2.5 店舗紹介 ===== {%- endcomment -%}
+  {%- if store.description != blank -%}
+  <div class="store-detail__section store-detail__about">
+    <h2 class="store-detail__section-title h2">店舗紹介</h2>
+    <div class="store-detail__about-content">
+      {%- if store.image != blank -%}
+        <div class="store-detail__about-image">
+          <img
+            src="{{ store.image | image_url: width: 600 }}"
+            alt="{{ store.name }}"
+            width="600"
+            height="400"
+            loading="lazy"
+            style="border-radius: 8px; width: 100%; height: auto; object-fit: cover;"
+          >
+        </div>
+      {%- endif -%}
+      <div class="store-detail__about-text">
+        {{ store.description | newline_to_br }}
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== 3. 工賃表（全店共通スニペット） ===== {%- endcomment -%}
+  {%- if section.settings.show_services -%}
+  <div class="store-detail__section">
+    {%- render 'repair-prices' -%}
+  </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== 4. FAQ ===== {%- endcomment -%}
+  {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}
+  {%- if faq_blocks.size > 0 -%}
+  <div class="store-detail__section">
+    <h2 class="store-detail__section-title h2">よくある質問</h2>
+    <div class="store-detail__faq">
+      {%- for block in faq_blocks -%}
+        <details class="store-detail__faq-item" {{ block.shopify_attributes }}>
+          <summary class="store-detail__faq-question">{{ block.settings.question }}</summary>
+          <div class="store-detail__faq-answer">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== 5. 戻る ===== {%- endcomment -%}
+  <div class="store-detail__back">
+    <a href="/pages/stores" class="store-detail__back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      店舗一覧に戻る
+    </a>
+  </div>
+
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "店舗詳細（メタオブジェクト）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_services",
+      "label": "修理・サービス欄を表示",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "余白"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "上の余白",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "下の余白",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "修理メニュー",
+      "settings": [
+        {
+          "type": "text",
+          "id": "service_name",
+          "label": "メニュー名",
+          "default": "パンク修理"
+        },
+        {
+          "type": "text",
+          "id": "service_price",
+          "label": "料金",
+          "default": "¥1,100〜"
+        },
+        {
+          "type": "text",
+          "id": "service_note",
+          "label": "備考"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "質問",
+          "default": "他店で購入した自転車も修理できますか？"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "回答",
+          "default": "<p>はい、他店でご購入の自転車も修理いたします。お気軽にお持ちください。</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "店舗詳細（メタオブジェクト）",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": { "service_name": "パンク修理", "service_price": "¥1,100〜" }
+        },
+        {
+          "type": "service",
+          "settings": { "service_name": "ブレーキ調整", "service_price": "¥550〜" }
+        },
+        {
+          "type": "service",
+          "settings": { "service_name": "チェーン交換", "service_price": "¥2,200〜" }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "他店で購入した自転車も修理できますか？",
+            "answer": "<p>はい、他店でご購入の自転車も修理いたします。お気軽にお持ちください。</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "修理の待ち時間はどのくらいですか？",
+            "answer": "<p>パンク修理で約15〜30分、その他の修理は内容により異なります。混雑時はお預かりとなる場合があります。</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

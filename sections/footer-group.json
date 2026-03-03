@@ -5,41 +5,65 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "footer-0": {
+        "footer-browse": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
-            "menu": "footer"
+            "heading": "自転車を探す（EC）",
+            "menu": "footer-browse"
           }
         },
-        "footer-1": {
+        "footer-stores": {
           "type": "link_list",
           "settings": {
-            "heading": "Info",
-            "menu": "footer"
+            "heading": "店舗・サービス",
+            "menu": "footer-stores"
           }
         },
-        "footer-2": {
-          "type": "text",
+        "footer-support": {
+          "type": "link_list",
           "settings": {
-            "heading": "Our mission",
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.<\/p>"
+            "heading": "選び方・安心サポート",
+            "menu": "footer-support"
+          }
+        },
+        "footer-stories": {
+          "type": "link_list",
+          "settings": {
+            "heading": "ストーリー・スタッフ",
+            "menu": "footer-stories"
+          }
+        },
+        "footer-about": {
+          "type": "link_list",
+          "settings": {
+            "heading": "企業・ブランド情報",
+            "menu": "footer-about"
+          }
+        },
+        "footer-news-jobs": {
+          "type": "link_list",
+          "settings": {
+            "heading": "お知らせ・採用",
+            "menu": "footer-news-jobs"
           }
         }
       },
       "block_order": [
-        "footer-0",
-        "footer-1",
-        "footer-2"
+        "footer-browse",
+        "footer-stores",
+        "footer-support",
+        "footer-stories",
+        "footer-about",
+        "footer-news-jobs"
       ],
       "settings": {
         "color_scheme": "scheme-1",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_enable": false,
+        "newsletter_heading": "",
         "show_social": true,
         "enable_country_selector": false,
         "enable_language_selector": false,
-        "payment_enable": true,
+        "payment_enable": false,
         "show_policy": false,
         "margin_top": 48,
         "padding_top": 36,

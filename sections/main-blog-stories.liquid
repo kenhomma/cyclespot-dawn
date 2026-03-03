@@ -1,0 +1,189 @@
+{{ 'section-main-blog-stories.css' | asset_url | stylesheet_tag }}
+
+{%- paginate blog.articles by section.settings.articles_per_page -%}
+<section class="blog-stories">
+  <div class="page-width">
+
+    {%- comment -%} ===== Intro ===== {%- endcomment -%}
+    <div class="blog-stories__intro cs-fade-in">
+      {%- if section.settings.kicker != blank -%}
+        <p class="blog-stories__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      <h1 class="blog-stories__title">{{ blog.title | escape }}</h1>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="blog-stories__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== Tag Filter ===== {%- endcomment -%}
+    {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+      <div class="blog-stories__tags">
+        <a
+          href="{{ blog.url }}"
+          class="blog-stories__tag{% unless current_tags %} blog-stories__tag--active{% endunless %}"
+        >
+          すべて
+        </a>
+        {%- for tag in blog.all_tags -%}
+          {%- comment -%} category: / story: プレフィクス付きタグはフィルタに表示しない {%- endcomment -%}
+          {%- unless tag contains 'category:' or tag contains 'story:' -%}
+            {%- if current_tags contains tag -%}
+              <a href="{{ blog.url }}" class="blog-stories__tag blog-stories__tag--active">{{ tag }}</a>
+            {%- else -%}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="blog-stories__tag">{{ tag }}</a>
+            {%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== Article Grid ===== {%- endcomment -%}
+    {%- if blog.articles_count > 0 -%}
+      <div class="blog-stories__grid cs-fade-in cs-fade-in--stagger">
+        {%- for article in blog.articles -%}
+          <a href="{{ article.url }}" class="blog-stories__card">
+            {%- if article.image -%}
+              <div class="blog-stories__card-image">
+                {{
+                  article.image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 450, 600',
+                    sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                    class: 'blog-stories__card-img'
+                }}
+              </div>
+            {%- else -%}
+              <div class="blog-stories__card-image"></div>
+            {%- endif -%}
+            <div class="blog-stories__card-body">
+              <time class="blog-stories__card-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                {{ article.published_at | date: '%Y.%m.%d' }}
+              </time>
+              <h2 class="blog-stories__card-title">{{ article.title }}</h2>
+              {%- if section.settings.show_excerpt -%}
+                <p class="blog-stories__card-excerpt">
+                  {{ article.excerpt_or_content | strip_html | truncate: 80 }}
+                </p>
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {%- comment -%} ===== Pagination ===== {%- endcomment -%}
+      {%- if paginate.pages > 1 -%}
+        <div class="blog-stories__pagination">
+          {% render 'pagination', paginate: paginate %}
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <p class="blog-stories__empty">{{ section.settings.empty_text | default: 'まだストーリーは公開されていません。' }}</p>
+    {%- endif -%}
+
+    {%- comment -%} ===== 10の約束バナー ===== {%- endcomment -%}
+    {%- if section.settings.promises_heading != blank -%}
+      <div class="blog-stories__promises cs-fade-in">
+        <div class="blog-stories__promises-inner">
+          <h2 class="blog-stories__promises-heading">{{ section.settings.promises_heading }}</h2>
+          {%- if section.settings.promises_text != blank -%}
+            <p class="blog-stories__promises-text">{{ section.settings.promises_text }}</p>
+          {%- endif -%}
+          {%- if section.settings.promises_link_label != blank -%}
+            <a href="{{ section.settings.promises_link }}" class="cs-btn cs-btn--secondary">
+              {{ section.settings.promises_link_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "ストーリーブログ一覧（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "ヘッダー"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "キッカー",
+      "default": "STORIES"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "サブテキスト",
+      "default": "街の自転車屋を支える人たちのストーリー。"
+    },
+    {
+      "type": "header",
+      "content": "記事一覧"
+    },
+    {
+      "type": "range",
+      "id": "articles_per_page",
+      "label": "1ページあたりの記事数",
+      "min": 3,
+      "max": 24,
+      "step": 3,
+      "default": 9
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "抜粋を表示",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "タグフィルターを表示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "記事がない場合のテキスト",
+      "default": "まだストーリーは公開されていません。"
+    },
+    {
+      "type": "header",
+      "content": "10の約束バナー"
+    },
+    {
+      "type": "text",
+      "id": "promises_heading",
+      "label": "見出し",
+      "default": "10の約束"
+    },
+    {
+      "type": "textarea",
+      "id": "promises_text",
+      "label": "テキスト",
+      "default": "「すべては『ありがとう』のために」—— サイクルスポットのブランドステートメント。"
+    },
+    {
+      "type": "text",
+      "id": "promises_link_label",
+      "label": "ボタンラベル",
+      "default": "10の約束を読む"
+    },
+    {
+      "type": "url",
+      "id": "promises_link",
+      "label": "ボタンリンク"
+    }
+  ]
+}
+{% endschema %}

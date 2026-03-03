@@ -1,0 +1,123 @@
+{%- comment -%}
+  カタログ価格表示スニペット
+  Shopify には税込価格（×1.10）で格納されているため、税抜は逆算する。
+  - compare_at_price あり → 定価（税抜）/ 売価（税抜）/ 税込価格 / 割引率
+  - compare_at_price なし → 販売価格（税抜）/ 税込価格
+{%- endcomment -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign selling = current_variant.price -%}
+{%- assign msrp = current_variant.compare_at_price -%}
+
+{%- comment -%} 税抜価格の逆算（税込 × 10 ÷ 11） {%- endcomment -%}
+{%- assign selling_excl = selling | times: 10 | divided_by: 11 -%}
+
+<div class="catalog-price" data-variant-id="{{ current_variant.id }}">
+
+  {%- if msrp and msrp > selling -%}
+    {%- comment -%} ===== 定価あり（割引表示） ===== {%- endcomment -%}
+    {%- assign msrp_excl = msrp | times: 10 | divided_by: 11 -%}
+    {%- assign diff = msrp | minus: selling -%}
+    {%- assign discount_pct = diff | times: 100 | divided_by: msrp -%}
+
+    <div class="catalog-price__discount-badge">
+      <span>{{ discount_pct }}%OFF</span>
+    </div>
+
+    <div class="catalog-price__row">
+      <span class="catalog-price__label">定価（税抜）</span>
+      <span class="catalog-price__value catalog-price__value--msrp">
+        <s>{{ msrp_excl | money_without_trailing_zeros }}</s>
+      </span>
+    </div>
+
+    <div class="catalog-price__row">
+      <span class="catalog-price__label">売価（税抜）</span>
+      <span class="catalog-price__value catalog-price__value--selling">
+        {{ selling_excl | money_without_trailing_zeros }}
+      </span>
+    </div>
+
+    <div class="catalog-price__row catalog-price__row--tax">
+      <span class="catalog-price__label">税込価格</span>
+      <span class="catalog-price__value catalog-price__value--tax-incl">
+        {{ selling | money_without_trailing_zeros }}
+      </span>
+    </div>
+
+  {%- else -%}
+    {%- comment -%} ===== 定価なし（通常表示） ===== {%- endcomment -%}
+
+    <div class="catalog-price__row">
+      <span class="catalog-price__label">販売価格（税抜）</span>
+      <span class="catalog-price__value catalog-price__value--selling">
+        {{ selling_excl | money_without_trailing_zeros }}
+      </span>
+    </div>
+
+    <div class="catalog-price__row catalog-price__row--tax">
+      <span class="catalog-price__label">税込価格</span>
+      <span class="catalog-price__value catalog-price__value--tax-incl">
+        {{ selling | money_without_trailing_zeros }}
+      </span>
+    </div>
+
+  {%- endif -%}
+
+</div>
+
+<style>
+.catalog-price {
+  margin: 0.5rem 0 1rem;
+}
+.catalog-price__discount-badge {
+  margin-bottom: 0.5rem;
+}
+.catalog-price__discount-badge span {
+  display: inline-block;
+  background: #d32f2f;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+.catalog-price__row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+.catalog-price__row--tax {
+  margin-top: 0.15rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+.catalog-price__label {
+  font-size: 0.8rem;
+  color: #666;
+  white-space: nowrap;
+  min-width: 7em;
+}
+.catalog-price__value {
+  font-size: 1rem;
+}
+.catalog-price__value--msrp {
+  color: #999;
+  font-size: 0.9rem;
+}
+.catalog-price__value--msrp s {
+  text-decoration: line-through;
+}
+.catalog-price__value--selling {
+  color: #d32f2f;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.catalog-price__value--tax-incl {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+}
+</style>

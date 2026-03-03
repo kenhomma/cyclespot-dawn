@@ -1,0 +1,112 @@
+{{ 'section-pickup-cyclespot.css' | asset_url | stylesheet_tag }}
+
+{%- assign collection = collections[section.settings.collection] -%}
+
+<section class="pickup-cs">
+  <div class="page-width">
+    <div class="cs-section-heading cs-fade-in">
+      <h2 class="cs-section-heading__title">{{ section.settings.title | default: 'おすすめの自転車' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="cs-section-heading__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if collection != blank and collection.products_count > 0 -%}
+      <div class="pickup-cs__grid cs-fade-in cs-fade-in--stagger">
+        {%- for product in collection.products limit: section.settings.products_to_show -%}
+          <a href="{{ product.url }}" class="pickup-cs__card">
+            <div class="pickup-cs__card-image">
+              {%- if product.featured_image != blank -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '200, 300, 400, 600',
+                    sizes: '(min-width: 750px) 25vw, 50vw',
+                    class: 'pickup-cs__card-img'
+                }}
+              {%- endif -%}
+            </div>
+            {%- if section.settings.show_vendor and product.vendor != blank -%}
+              <span class="pickup-cs__card-vendor">{{ product.vendor }}</span>
+            {%- endif -%}
+            <h3 class="pickup-cs__card-title">{{ product.title }}</h3>
+            <div class="pickup-cs__card-price">
+              {%- if product.compare_at_price > product.price -%}
+                <span class="pickup-cs__card-price--compare">{{ product.compare_at_price | money }}</span>
+              {%- endif -%}
+              {{ product.price | money }}
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_view_all -%}
+        <div class="pickup-cs__view-all cs-fade-in">
+          <a href="{{ collection.url }}" class="cs-btn cs-btn--secondary">
+            {{ section.settings.view_all_label | default: 'すべて見る' }}
+          </a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "おすすめ商品（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル",
+      "default": "おすすめの自転車"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "サブテキスト"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "コレクション"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "default": 8,
+      "label": "表示する商品数"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "ブランド名を表示",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "「すべて見る」ボタンを表示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "ボタンラベル",
+      "default": "すべて見る"
+    }
+  ],
+  "presets": [
+    {
+      "name": "おすすめ商品（CS）"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,345 @@
+/* ==========================================================================
+   Article Story — CYCLESPOT STORIES 個別記事ページ
+   ========================================================================== */
+
+/* ---------- Hero Image ---------- */
+.article-story__hero {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__hero {
+    aspect-ratio: 16 / 9;
+    max-height: 56rem;
+  }
+}
+
+.article-story__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Article Header ---------- */
+.article-story__header {
+  max-width: var(--cs-max-width-text);
+  margin: 0 auto;
+  padding: 4rem 2rem 0;
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__header {
+    padding: 6rem 2rem 0;
+  }
+}
+
+.article-story__meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.article-story__category {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cs-color-accent);
+}
+
+.article-story__number {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--cs-color-text-light);
+}
+
+.article-story__title {
+  font-size: 2.6rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  margin: 0 0 2rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__title {
+    font-size: 3.4rem;
+    line-height: 1.35;
+  }
+}
+
+.article-story__title::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 1px;
+  background: var(--cs-color-text);
+  margin: 2.4rem auto 0;
+}
+
+.article-story__date {
+  font-size: 1.2rem;
+  color: var(--cs-color-text-light);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Lead / Excerpt ---------- */
+.article-story__lead {
+  max-width: var(--cs-max-width-text);
+  margin: 3rem auto 0;
+  padding: 0 2rem;
+  font-size: 1.5rem;
+  line-height: 2;
+  color: var(--cs-color-text-muted);
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__lead {
+    font-size: 1.6rem;
+    margin-top: 4rem;
+  }
+}
+
+/* ---------- Content Body ---------- */
+.article-story__content {
+  max-width: var(--cs-max-width-text);
+  margin: 4rem auto 0;
+  padding: 0 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__content {
+    margin-top: 6rem;
+  }
+}
+
+/* RTE typography overrides for story content */
+.article-story__content.rte {
+  font-size: 1.5rem;
+  line-height: 2;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__content.rte {
+    font-size: 1.6rem;
+  }
+}
+
+.article-story__content.rte h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  letter-spacing: 0.02em;
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__content.rte h2 {
+    font-size: 2.6rem;
+  }
+}
+
+.article-story__content.rte h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-top: 4rem;
+  margin-bottom: 1.6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__content.rte h3 {
+    font-size: 2rem;
+  }
+}
+
+.article-story__content.rte p {
+  margin-bottom: 2rem;
+}
+
+.article-story__content.rte p + p {
+  margin-top: 0;
+}
+
+/* Interview format: bold questions */
+.article-story__content.rte strong {
+  color: var(--cs-color-text);
+}
+
+/* Blockquote — accent green left border */
+.article-story__content.rte blockquote {
+  border-left: 3px solid var(--cs-color-accent);
+  margin: 3rem 0;
+  padding: 1.6rem 2.4rem;
+  font-style: normal;
+  color: var(--cs-color-text-muted);
+  background: var(--cs-color-warm-bg);
+}
+
+.article-story__content.rte blockquote p {
+  margin-bottom: 0;
+}
+
+/* Column box — for editorial asides like "― Column ―" */
+.article-story__content.rte .article-column {
+  border: 1px solid var(--cs-color-border);
+  border-radius: 2px;
+  padding: 2.4rem;
+  margin: 4rem 0;
+  background: var(--cs-color-warm-bg);
+}
+
+.article-story__content.rte .article-column h4,
+.article-story__content.rte .article-column h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--cs-color-accent);
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+}
+
+/* Horizontal rule between chapters */
+.article-story__content.rte hr {
+  border: none;
+  border-top: 1px solid var(--cs-color-border);
+  margin: 4rem 0;
+}
+
+/* Images within content */
+.article-story__content.rte img {
+  border-radius: 2px;
+  margin: 3rem 0;
+}
+
+/* ---------- Share ---------- */
+.article-story__share {
+  max-width: var(--cs-max-width-text);
+  margin: 4rem auto 0;
+  padding: 0 2rem;
+  border-top: 1px solid var(--cs-color-border);
+  padding-top: 3rem;
+}
+
+/* ---------- Related Stories ---------- */
+.article-story__related {
+  padding: 6rem 0;
+  border-top: 1px solid var(--cs-color-border);
+  margin-top: 6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__related {
+    padding: 8rem 0;
+    margin-top: 8rem;
+  }
+}
+
+.article-story__related-heading {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.article-story__related-heading h2 {
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--cs-color-text);
+}
+
+.article-story__related-heading h2::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 1px;
+  background: var(--cs-color-text);
+  margin: 1.6rem auto 0;
+}
+
+.article-story__related-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-story__related-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* Related card — matches stories-landing card design */
+.article-story__related-card {
+  text-decoration: none;
+  color: var(--cs-color-text);
+  display: block;
+}
+
+.article-story__related-card-image {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  margin-bottom: 1.6rem;
+}
+
+.article-story__related-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.article-story__related-card:hover .article-story__related-card-img {
+  transform: scale(1.03);
+}
+
+.article-story__related-card-date {
+  font-size: 1.2rem;
+  color: var(--cs-color-text-light);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.article-story__related-card-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ---------- Back Link ---------- */
+.article-story__back {
+  text-align: center;
+  padding: 3rem 0 6rem;
+}
+
+.article-story__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.3rem;
+  color: var(--cs-color-text);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color var(--cs-transition);
+}
+
+.article-story__back-link:hover {
+  color: var(--cs-color-accent);
+}
+
+.article-story__back-link svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  transform: rotate(180deg);
+}

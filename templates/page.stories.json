@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "stories-landing",
+      "blocks": {
+        "featured1": {
+          "type": "featured_story",
+          "settings": {
+            "title": "高瀬顧問が語る、自転車屋のはじまり",
+            "category": "創業ストーリー",
+            "excerpt": "「若者は時間がない、年寄りは金がない。そんな時代に自転車屋を始めた理由。」"
+          }
+        },
+        "featured2": {
+          "type": "featured_story",
+          "settings": {
+            "title": "加藤社長インタビュー — すべては『ありがとう』のために",
+            "category": "経営ストーリー",
+            "excerpt": "「街の自転車屋として100店舗を超えた今も変わらないもの。断らないこと、寄りそうこと。」"
+          }
+        }
+      },
+      "block_order": ["featured1", "featured2"],
+      "settings": {
+        "kicker": "STORIES",
+        "title": "CYCLESPOT STORIES",
+        "subtitle": "街の自転車屋を支える人たちのストーリー。",
+        "blog": "stories",
+        "promises_heading": "10の約束",
+        "promises_text": "「すべては『ありがとう』のために」—— サイクルスポットのブランドステートメント。",
+        "promises_link_label": "10の約束を読む",
+        "promises_link": "/pages/brand-statement"
+      }
+    }
+  },
+  "order": ["main"]
+}

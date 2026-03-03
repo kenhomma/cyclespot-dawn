@@ -1,0 +1,81 @@
+{
+  "sections": {
+    "main": {
+      "type": "guide-landing",
+      "blocks": {
+        "commute": {
+          "type": "guide_card",
+          "settings": {
+            "title": "通勤・通学",
+            "text": "毎日の移動がもっと快適に。軽さ・速さ・防犯性から選ぶコツをご紹介。"
+          }
+        },
+        "child": {
+          "type": "guide_card",
+          "settings": {
+            "title": "子ども乗せ",
+            "text": "前乗せ・後ろ乗せの違い、安全基準、電動アシストの選び方など。"
+          }
+        },
+        "senior": {
+          "type": "guide_card",
+          "settings": {
+            "title": "シニア・久しぶりの自転車",
+            "text": "安定性・乗り降りのしやすさ・電動アシストの活用法をご案内。"
+          }
+        },
+        "sports": {
+          "type": "guide_card",
+          "settings": {
+            "title": "趣味・スポーツライド",
+            "text": "クロスバイク、ロードバイク、マウンテンバイク。目的に合った一台を。"
+          }
+        },
+        "policy1": {
+          "type": "policy",
+          "settings": {
+            "title": "1台1台に責任を",
+            "text": "修理は命に関わる仕事です。だからこそ、一台一台を丁寧に仕上げ、安心してお乗りいただける状態でお渡しします。"
+          }
+        },
+        "policy2": {
+          "type": "policy",
+          "settings": {
+            "title": "他店購入車も歓迎",
+            "text": "サイクルスポット以外でご購入の自転車も、修理・メンテナンスを承ります。お気軽にお持ちください。"
+          }
+        },
+        "faq1": {
+          "type": "faq",
+          "settings": {
+            "question": "空気入れだけでもいいですか？",
+            "answer": "<p>もちろんです。空気入れは無料で、どなたでもご利用いただけます。お気軽にお立ち寄りください。</p>"
+          }
+        },
+        "faq2": {
+          "type": "faq",
+          "settings": {
+            "question": "購入後の保証はありますか？",
+            "answer": "<p>ご購入いただいた自転車には、メーカー保証に加え、サイクルスポット独自の安心サポートをご用意しています。詳しくは店頭スタッフにお尋ねください。</p>"
+          }
+        },
+        "faq3": {
+          "type": "faq",
+          "settings": {
+            "question": "子ども用自転車のサイズはどう選べばいいですか？",
+            "answer": "<p>お子さまの身長・年齢に合わせたサイズ目安表をご用意しています。店頭でのフィッティングも無料で承りますので、ぜひ実物をお試しください。</p>"
+          }
+        }
+      },
+      "block_order": ["commute", "child", "senior", "sports", "policy1", "policy2", "faq1", "faq2", "faq3"],
+      "settings": {
+        "kicker": "GUIDE",
+        "title": "選び方・安心サポート",
+        "lead": "初めての自転車選びでも安心。用途・ライフステージに合わせて、スタッフが一緒に答えを出します。",
+        "policy_heading": "安心サポートポリシー",
+        "faq_heading": "よくある質問"
+      }
+    }
+  },
+  "order": ["main"]
+}

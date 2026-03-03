@@ -1,0 +1,172 @@
+/* About / Company page */
+.about-company {
+  padding: 6rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .about-company {
+    padding: 8rem 0;
+  }
+}
+
+/* Intro */
+.about-company__intro {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.about-company__kicker {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cs-color-text-light);
+  margin: 0 0 1.6rem;
+}
+
+.about-company__title {
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 0 0 1.6rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .about-company__title {
+    font-size: 4rem;
+  }
+}
+
+.about-company__title::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 1px;
+  background: var(--cs-color-text);
+  margin: 2rem auto 0;
+}
+
+.about-company__lead {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 2rem auto 0;
+  max-width: var(--cs-max-width-text);
+}
+
+/* Sections */
+.about-company__section {
+  margin-bottom: 6rem;
+  max-width: var(--cs-max-width-narrow);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-company__section-title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin: 0 0 3rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--cs-color-border);
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .about-company__section-title {
+    font-size: 2.4rem;
+  }
+}
+
+/* Vision grid */
+.about-company__vision-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .about-company__vision-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+}
+
+.about-company__vision-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cs-color-accent);
+  margin: 0 0 1rem;
+}
+
+.about-company__vision-text {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: var(--cs-color-text);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Table */
+.about-company__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.about-company__table th,
+.about-company__table td {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--cs-color-border);
+  text-align: left;
+  vertical-align: top;
+  font-size: 1.5rem;
+}
+
+.about-company__table th {
+  width: 30%;
+  font-weight: 500;
+  color: var(--cs-color-text-muted);
+  white-space: nowrap;
+  padding-right: 2rem;
+}
+
+/* Richtext */
+.about-company__richtext {
+  font-size: 1.5rem;
+  line-height: 2;
+  color: var(--cs-color-text);
+}
+
+.about-company__richtext p {
+  margin-bottom: 1.6rem;
+}
+
+/* CTA */
+.about-company__cta {
+  text-align: center;
+  padding: 6rem 2rem;
+  background: var(--cs-color-warm-bg);
+  border-radius: 4px;
+  max-width: var(--cs-max-width-narrow);
+  margin: 0 auto;
+}
+
+.about-company__cta-heading {
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin: 0 0 1.6rem;
+}
+
+.about-company__cta-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 0 0 3rem;
+  max-width: var(--cs-max-width-text);
+  margin-left: auto;
+  margin-right: auto;
+}

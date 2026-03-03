@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "main": {
+      "type": "article-story",
+      "settings": {
+        "show_date": true,
+        "show_excerpt": true,
+        "show_share": true,
+        "show_related": true,
+        "related_heading": "他のストーリーを読む",
+        "back_label": "ストーリー一覧へ"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

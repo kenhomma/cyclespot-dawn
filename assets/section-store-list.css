@@ -1,0 +1,322 @@
+.store-list__title {
+  margin-bottom: 0.5rem;
+}
+
+.store-list__description {
+  color: rgba(var(--color-foreground), 0.7);
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+/* ===== Map ===== */
+#store-map {
+  width: 100%;
+  height: 340px;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  background: rgba(var(--color-foreground), 0.05);
+  z-index: 0;
+}
+
+@media screen and (min-width: 750px) {
+  #store-map {
+    height: 480px;
+  }
+}
+
+/* Leaflet marker overrides */
+.store-list__marker,
+.store-list__user-marker {
+  background: none !important;
+  border: none !important;
+}
+
+/* Cluster styles */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background-color: rgba(45, 125, 45, 0.25) !important;
+}
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background-color: rgba(45, 125, 45, 0.7) !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* ===== Search tabs ===== */
+.store-list__search-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid rgba(var(--color-foreground), 0.1);
+  margin-bottom: 0;
+  overflow-x: auto;
+}
+
+.store-list__tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.2rem 1.6rem;
+  border: none;
+  background: none;
+  color: rgba(var(--color-foreground), 0.5);
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.store-list__tab:hover {
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.store-list__tab.active {
+  color: rgb(var(--color-foreground));
+  border-bottom-color: rgb(var(--color-foreground));
+}
+
+.store-list__tab svg {
+  flex-shrink: 0;
+}
+
+/* ===== Panels ===== */
+.store-list__panel {
+  display: none;
+  padding: 2rem 0;
+}
+
+.store-list__panel.active {
+  display: block;
+}
+
+/* Nearby */
+.store-list__nearby-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.store-list__nearby-status {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+/* Area selects */
+.store-list__area-selects {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.store-list__select {
+  padding: 1rem 1.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 8px;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-size: 1.4rem;
+  min-width: 180px;
+  cursor: pointer;
+}
+
+.store-list__select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Search box */
+.store-list__search-box {
+  display: flex;
+  gap: 0.8rem;
+  max-width: 500px;
+}
+
+.store-list__search-input {
+  flex: 1;
+  padding: 1rem 1.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 8px;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-size: 1.4rem;
+}
+
+.store-list__search-input:focus {
+  outline: none;
+  border-color: rgb(var(--color-foreground));
+}
+
+.store-list__search-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ===== Type filters ===== */
+.store-list__type-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.store-list__type-btn {
+  padding: 0.6rem 1.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  border-radius: 40px;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.store-list__type-btn:hover {
+  border-color: rgb(var(--color-foreground));
+}
+
+.store-list__type-btn.active {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  border-color: rgb(var(--color-foreground));
+}
+
+/* ===== Grid ===== */
+.store-list__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  margin-top: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .store-list__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .store-list__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== Card with image ===== */
+.store-list__card {
+  display: block;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 8px;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.store-list__card:hover {
+  border-color: rgba(var(--color-foreground), 0.3);
+  box-shadow: 0 4px 16px rgba(var(--color-foreground), 0.06);
+}
+
+.store-list__card-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image */
+.store-list__card-image {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: rgba(var(--color-foreground), 0.04);
+}
+
+.store-list__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.store-list__card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Body */
+.store-list__card-body {
+  padding: 1.6rem;
+}
+
+.store-list__card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.store-list__badge {
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.store-list__badge--cyclespot {
+  background: #e8f4e8;
+  color: #2d7d2d;
+}
+
+.store-list__badge--lecyc {
+  background: #e8ecf4;
+  color: #2d4a7d;
+}
+
+.store-list__distance {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #d97706;
+}
+
+.store-list__card-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.store-list__card-info p {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.7);
+  line-height: 1.4;
+}
+
+.store-list__card-info svg {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+/* ===== Count ===== */
+.store-list__count {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.5);
+}

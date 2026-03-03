@@ -1,0 +1,127 @@
+{{ 'section-support-teaser.css' | asset_url | stylesheet_tag }}
+
+<section class="support-teaser cs-bg-warm">
+  <div class="page-width">
+    <div class="cs-section-heading cs-fade-in">
+      <h2 class="cs-section-heading__title">{{ section.settings.title | default: '安心サポート' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="cs-section-heading__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="support-teaser__grid cs-fade-in cs-fade-in--stagger">
+      {%- for block in section.blocks -%}
+        <div class="support-teaser__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            <div class="support-teaser__image">
+              {{
+                block.settings.image
+                | image_url: width: 600
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '300, 450, 600',
+                  sizes: '(min-width: 750px) 33vw, 100vw',
+                  class: 'support-teaser__img'
+              }}
+            </div>
+          {%- endif -%}
+          <h3 class="support-teaser__card-title">{{ block.settings.title }}</h3>
+          <p class="support-teaser__card-text">{{ block.settings.text }}</p>
+          {%- if block.settings.link_label != blank -%}
+            <a href="{{ block.settings.link }}" class="cs-btn--text">
+              {{ block.settings.link_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "安心サポート（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "セクションタイトル",
+      "default": "安心サポート"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "サブテキスト",
+      "default": "空気入れだけでもOK。他店購入車も歓迎。私たちは、自転車のある暮らしをずっと支えます。"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "カード",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "画像"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル",
+          "default": "修理・メンテナンス"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明文",
+          "default": "パンク修理からオーバーホールまで。プロの整備士が、1台1台丁寧に仕上げます。"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "リンクラベル"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "リンク先"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "安心サポート（CS）",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "title": "修理・メンテナンス",
+            "text": "パンク修理からオーバーホールまで。プロの整備士が、1台1台丁寧に仕上げます。",
+            "link_label": "工賃表を見る"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "はじめての方へ",
+            "text": "空気入れだけでもお気軽にどうぞ。自転車屋さんがはじめての方も、安心してお越しください。",
+            "link_label": "はじめてガイド"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "title": "選び方ガイド",
+            "text": "通勤通学、子ども乗せ、シニア。ライフステージに合わせて、スタッフが一緒に選びます。",
+            "link_label": "選び方ガイドへ"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

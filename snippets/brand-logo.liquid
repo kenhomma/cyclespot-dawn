@@ -1,0 +1,78 @@
+{%- comment -%}
+  ブランドロゴ表示スニペット
+  商品が属するブランドコレクション（handle が 'brand-' で始まる）を検索し、
+  コレクション画像があればロゴとして表示する。コレクションページへのリンク付き。
+
+  Accepts:
+  - brand_product: {Object} Product Liquid object（カード等で使う場合）。省略時は product を使用。
+  - compact: {Boolean} true にするとカード用の小さいサイズで表示。Default: false
+{%- endcomment -%}
+
+{%- assign bp = brand_product | default: product -%}
+
+{%- assign brand_collection = nil -%}
+{%- for collection in bp.collections -%}
+  {%- if collection.handle contains 'brand-' -%}
+    {%- assign brand_collection = collection -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if brand_collection -%}
+  <div class="brand-logo-wrap{% if compact %} brand-logo-wrap--compact{% endif %}">
+    <a href="{{ brand_collection.url }}" class="brand-logo-link" title="{{ brand_collection.title }}の自転車一覧">
+      {%- if brand_collection.image -%}
+        <img
+          src="{{ brand_collection.image | image_url: width: 200 }}"
+          alt="{{ brand_collection.title }}ロゴ"
+          width="200"
+          height="{{ 200 | divided_by: brand_collection.image.aspect_ratio | round }}"
+          loading="lazy"
+          class="brand-logo-img"
+        >
+      {%- else -%}
+        <span class="brand-logo-text">{{ brand_collection.title }}</span>
+      {%- endif -%}
+    </a>
+  </div>
+
+  {%- unless compact -%}
+  <style>
+  .brand-logo-wrap {
+    margin: 0.25rem 0 0.75rem;
+  }
+  .brand-logo-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .brand-logo-link:hover {
+    opacity: 0.7;
+  }
+  .brand-logo-img {
+    max-width: 160px;
+    max-height: 48px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .brand-logo-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .brand-logo-wrap--compact {
+    margin: 0 0 0.15rem;
+  }
+  .brand-logo-wrap--compact .brand-logo-img {
+    max-width: 64px;
+    max-height: 16px;
+  }
+  .brand-logo-wrap--compact .brand-logo-text {
+    font-size: 0.65rem;
+  }
+  </style>
+  {%- endunless -%}
+{%- endif -%}

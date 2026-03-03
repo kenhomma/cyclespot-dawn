@@ -1,0 +1,134 @@
+{{ 'section-strengths-cyclespot.css' | asset_url | stylesheet_tag }}
+
+<section class="strengths-cs cs-bg-warm">
+  <div class="page-width">
+    <div class="cs-section-heading cs-fade-in">
+      <h2 class="cs-section-heading__title">{{ section.settings.title | default: 'サイクルスポットの3つの強み' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="cs-section-heading__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="strengths-cs__grid cs-fade-in cs-fade-in--stagger">
+      {%- for block in section.blocks -%}
+        <div class="strengths-cs__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.icon != blank -%}
+            <div class="strengths-cs__icon">
+              {{ block.settings.icon }}
+            </div>
+          {%- else -%}
+            <div class="strengths-cs__icon strengths-cs__icon--default">
+              {%- case forloop.index -%}
+                {%- when 1 -%}
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                {%- when 2 -%}
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+                {%- when 3 -%}
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              {%- endcase -%}
+            </div>
+          {%- endif -%}
+
+          <h3 class="strengths-cs__title">{{ block.settings.title }}</h3>
+          <p class="strengths-cs__text">{{ block.settings.text }}</p>
+
+          {%- if block.settings.link_label != blank -%}
+            <a href="{{ block.settings.link }}" class="cs-btn--text">
+              {{ block.settings.link_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "3つの強み（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "セクションタイトル",
+      "default": "サイクルスポットの3つの強み"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "サブテキスト"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "strength",
+      "name": "強み",
+      "settings": [
+        {
+          "type": "html",
+          "id": "icon",
+          "label": "アイコン（SVG HTML）"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル",
+          "default": "人間力"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明",
+          "default": "困ったらまず来てください。パンク修理も、空気入れも、ちょっとした相談も。「断らない」をモットーに、お客様に寄りそいます。"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "リンクラベル"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "リンク先"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "3つの強み（CS）",
+      "blocks": [
+        {
+          "type": "strength",
+          "settings": {
+            "title": "人間力 — 断らない、寄りそう",
+            "text": "困ったらまず来てください。パンク修理も、空気入れも、ちょっとした相談も。私たちは「断らない」をモットーに、一人ひとりのお客様に寄りそいます。",
+            "link_label": "スタッフの想いを見る",
+            "link": "/pages/stories"
+          }
+        },
+        {
+          "type": "strength",
+          "settings": {
+            "title": "商品力 — 豊富なブランド",
+            "text": "ブリヂストン、パナソニック、ヤマハなどの国内メーカーから、GIANT、Bianchi などの海外ブランドまで。通勤通学から趣味のライドまで幅広くご提案。",
+            "link_label": "自転車を探す",
+            "link": "/collections"
+          }
+        },
+        {
+          "type": "strength",
+          "settings": {
+            "title": "EC × 店舗 — 選んで、届いて、安心",
+            "text": "オンラインでじっくり選んで、お近くの店舗で受け取り。プロが最終調整してお渡しするから、届いたその日から安心して乗れます。",
+            "link_label": "店舗を探す",
+            "link": "/pages/stores"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

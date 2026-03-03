@@ -1,0 +1,70 @@
+/* Strengths section — Vermicular-inspired 3 column */
+.strengths-cs {
+  padding: 8rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .strengths-cs {
+    padding: 10rem 0;
+  }
+}
+
+.strengths-cs__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .strengths-cs__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+  }
+}
+
+.strengths-cs__item {
+  text-align: center;
+  padding: 0 1.6rem;
+}
+
+.strengths-cs__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.2rem;
+  height: 7.2rem;
+  margin: 0 auto 2.4rem;
+  border-radius: 50%;
+  color: var(--cs-color-accent);
+}
+
+.strengths-cs__icon--default {
+  background: var(--cs-color-accent-light);
+}
+
+.strengths-cs__title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin: 0 0 1.6rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .strengths-cs__title {
+    font-size: 2rem;
+  }
+}
+
+.strengths-cs__text {
+  font-size: 1.4rem;
+  line-height: 1.9;
+  color: var(--cs-color-text-muted);
+  margin: 0 0 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .strengths-cs__text {
+    font-size: 1.5rem;
+  }
+}

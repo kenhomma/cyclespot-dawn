@@ -1,0 +1,221 @@
+{{ 'section-stories-landing.css' | asset_url | stylesheet_tag }}
+
+<section class="stories-landing">
+  <div class="page-width">
+    {%- comment -%} ===== イントロ ===== {%- endcomment -%}
+    <div class="stories-landing__intro cs-fade-in">
+      {%- if section.settings.kicker != blank -%}
+        <p class="stories-landing__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      <h1 class="stories-landing__title">{{ section.settings.title | default: 'CYCLESPOT STORIES' }}</h1>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="stories-landing__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== 特集ストーリー ===== {%- endcomment -%}
+    {%- assign featured_blocks = section.blocks | where: 'type', 'featured_story' -%}
+    {%- if featured_blocks.size > 0 -%}
+      <div class="stories-landing__featured cs-fade-in cs-fade-in--stagger">
+        {%- for block in featured_blocks -%}
+          <a href="{{ block.settings.url }}" class="stories-landing__featured-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="stories-landing__featured-image">
+                {{
+                  block.settings.image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '375, 550, 800',
+                    sizes: '(min-width: 750px) 50vw, 100vw',
+                    class: 'stories-landing__featured-img'
+                }}
+              </div>
+            {%- endif -%}
+            <div class="stories-landing__featured-body">
+              {%- if block.settings.category != blank -%}
+                <span class="stories-landing__category">{{ block.settings.category }}</span>
+              {%- endif -%}
+              <h2 class="stories-landing__featured-title">{{ block.settings.title }}</h2>
+              {%- if block.settings.excerpt != blank -%}
+                <p class="stories-landing__featured-excerpt">{{ block.settings.excerpt }}</p>
+              {%- endif -%}
+              <span class="stories-landing__read-more">記事を読む &rarr;</span>
+            </div>
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== ブログ記事一覧（Shopify blogs.stories） ===== {%- endcomment -%}
+    {%- if section.settings.blog != blank -%}
+      {%- assign blog = blogs[section.settings.blog] -%}
+      {%- if blog.articles_count > 0 -%}
+        <div class="stories-landing__section-heading">
+          <h2 class="cs-section-heading__title">すべてのストーリー</h2>
+        </div>
+        <div class="stories-landing__grid cs-fade-in cs-fade-in--stagger">
+          {%- for article in blog.articles limit: 12 -%}
+            <a href="{{ article.url }}" class="stories-landing__card">
+              {%- if article.image != blank -%}
+                <div class="stories-landing__card-image">
+                  {{
+                    article.image
+                    | image_url: width: 600
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '300, 450, 600',
+                      sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                      class: 'stories-landing__card-img'
+                  }}
+                </div>
+              {%- endif -%}
+              <div class="stories-landing__card-body">
+                <time class="stories-landing__card-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                  {{ article.published_at | date: '%Y.%m.%d' }}
+                </time>
+                <h3 class="stories-landing__card-title">{{ article.title }}</h3>
+                <p class="stories-landing__card-excerpt">{{ article.excerpt_or_content | strip_html | truncate: 80 }}</p>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- comment -%} ===== 10の約束バナー ===== {%- endcomment -%}
+    {%- if section.settings.promises_heading != blank -%}
+      <div class="stories-landing__promises cs-fade-in">
+        <div class="stories-landing__promises-inner">
+          <h2 class="stories-landing__promises-heading">{{ section.settings.promises_heading }}</h2>
+          {%- if section.settings.promises_text != blank -%}
+            <p class="stories-landing__promises-text">{{ section.settings.promises_text }}</p>
+          {%- endif -%}
+          {%- if section.settings.promises_link_label != blank -%}
+            <a href="{{ section.settings.promises_link }}" class="cs-btn cs-btn--secondary">
+              {{ section.settings.promises_link_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ストーリー一覧（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "キッカー",
+      "default": "STORIES"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル",
+      "default": "CYCLESPOT STORIES"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "サブテキスト",
+      "default": "街の自転車屋を支える人たちのストーリー。"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "ブログ（stories）"
+    },
+    {
+      "type": "header",
+      "content": "10の約束バナー"
+    },
+    {
+      "type": "text",
+      "id": "promises_heading",
+      "label": "見出し",
+      "default": "10の約束"
+    },
+    {
+      "type": "textarea",
+      "id": "promises_text",
+      "label": "テキスト",
+      "default": "「すべては『ありがとう』のために」—— サイクルスポットのブランドステートメント。"
+    },
+    {
+      "type": "text",
+      "id": "promises_link_label",
+      "label": "ボタンラベル",
+      "default": "10の約束を読む"
+    },
+    {
+      "type": "url",
+      "id": "promises_link",
+      "label": "ボタンリンク"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "featured_story",
+      "name": "特集ストーリー",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル",
+          "default": "ストーリータイトル"
+        },
+        {
+          "type": "textarea",
+          "id": "excerpt",
+          "label": "抜粋"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "カテゴリ",
+          "default": "創業ストーリー"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "画像"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "リンク先"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "ストーリー一覧（CS）",
+      "blocks": [
+        {
+          "type": "featured_story",
+          "settings": {
+            "title": "高瀬顧問が語る、自転車屋のはじまり",
+            "category": "創業ストーリー",
+            "excerpt": "「若者は時間がない、年寄りは金がない。そんな時代に自転車屋を始めた理由。」"
+          }
+        },
+        {
+          "type": "featured_story",
+          "settings": {
+            "title": "加藤社長インタビュー",
+            "category": "経営ストーリー",
+            "excerpt": "「すべては『ありがとう』のために。街の自転車屋として100店舗を超えた今も変わらないもの。」"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog-stories",
+      "settings": {
+        "kicker": "STORIES",
+        "subtitle": "街の自転車屋を支える人たちのストーリー。",
+        "articles_per_page": 9,
+        "show_excerpt": true,
+        "show_tags": true,
+        "promises_heading": "10の約束",
+        "promises_text": "「すべては『ありがとう』のために」—— サイクルスポットのブランドステートメント。",
+        "promises_link_label": "10の約束を読む"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

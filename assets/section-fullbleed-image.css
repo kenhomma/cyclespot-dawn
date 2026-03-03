@@ -1,0 +1,91 @@
+/* ==========================================================================
+   Full-bleed Image Band — Vermicular-inspired visual break
+   ========================================================================== */
+
+.fullbleed-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.fullbleed-image__media {
+  width: 100%;
+  height: var(--fb-height-mobile, 40vh);
+}
+
+@media screen and (min-width: 750px) {
+  .fullbleed-image__media {
+    height: var(--fb-height-desktop, 50vh);
+  }
+}
+
+.fullbleed-image__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--fb-focal, center center);
+}
+
+/* Overlay */
+.fullbleed-image__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--fb-overlay, 0));
+  pointer-events: none;
+}
+
+/* Optional text content */
+.fullbleed-image__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  z-index: 1;
+}
+
+.fullbleed-image__text {
+  max-width: var(--cs-max-width-text);
+}
+
+.fullbleed-image__heading {
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #fff;
+  margin: 0 0 1.2rem;
+  line-height: 1.4;
+}
+
+@media screen and (min-width: 750px) {
+  .fullbleed-image__heading {
+    font-size: 3.2rem;
+  }
+}
+
+.fullbleed-image__subheading {
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 2.4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .fullbleed-image__subheading {
+    font-size: 1.6rem;
+  }
+}
+
+/* Parallax-like subtle scroll effect (pure CSS) */
+@media (prefers-reduced-motion: no-preference) {
+  .fullbleed-image__media {
+    overflow: hidden;
+  }
+
+  .fullbleed-image__img {
+    transition: transform 0.1s linear;
+    will-change: transform;
+  }
+}

@@ -1,0 +1,300 @@
+/* ==========================================================================
+   Custom CycleSpot Theme — Vermicular-inspired design
+   Generous whitespace, refined typography, calm neutral palette
+   ========================================================================== */
+
+/* ---------- Global overrides ---------- */
+:root {
+  --cs-spacing-section: 10rem;
+  --cs-spacing-section-mobile: 6rem;
+  --cs-color-warm-bg: #faf9f7;
+  --cs-color-warm-bg-alt: #f5f3ef;
+  --cs-color-text: #2c2c2c;
+  --cs-color-text-muted: #6b6b6b;
+  --cs-color-text-light: #999;
+  --cs-color-accent: #3a6b4c;
+  --cs-color-accent-light: #e8f0eb;
+  --cs-color-border: rgba(0, 0, 0, 0.08);
+  --cs-max-width-narrow: 72rem;
+  --cs-max-width-text: 56rem;
+  --cs-transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Refined body typography */
+body {
+  letter-spacing: 0.03rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Generous section spacing */
+.shopify-section {
+  margin-top: var(--cs-spacing-section-mobile);
+}
+
+@media screen and (min-width: 750px) {
+  .shopify-section {
+    margin-top: var(--cs-spacing-section);
+  }
+}
+
+.shopify-section:first-child,
+.shopify-section + .shopify-section--header,
+.section-header + .shopify-section {
+  margin-top: 0;
+}
+
+/* Full-bleed sections: no margin for seamless flow */
+.shopify-section:has(.section--fullbleed),
+.shopify-section:has(.section--hero-cs),
+.shopify-section:has(.section--hero-tagline) {
+  margin-top: 0;
+}
+
+/* ---------- Typography refinements ---------- */
+h1, .h1 {
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+h2, .h2 {
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+h3, .h3 {
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+/* Section heading style — simple underline accent */
+.cs-section-heading {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.cs-section-heading__title {
+  font-size: 2.6rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.2rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .cs-section-heading__title {
+    font-size: 3.2rem;
+  }
+}
+
+.cs-section-heading__title::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 1px;
+  background: var(--cs-color-text);
+  margin: 1.6rem auto 0;
+}
+
+.cs-section-heading__subtitle {
+  font-size: 1.4rem;
+  color: var(--cs-color-text-muted);
+  line-height: 1.8;
+  max-width: var(--cs-max-width-text);
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 750px) {
+  .cs-section-heading__subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* ---------- Button refinements ---------- */
+.cs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.4rem 3.2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: all var(--cs-transition);
+  border-radius: 0;
+}
+
+.cs-btn--primary {
+  background: var(--cs-color-text);
+  color: #fff;
+  border: 1px solid var(--cs-color-text);
+}
+
+.cs-btn--primary:hover {
+  background: transparent;
+  color: var(--cs-color-text);
+}
+
+.cs-btn--secondary {
+  background: transparent;
+  color: var(--cs-color-text);
+  border: 1px solid var(--cs-color-text);
+}
+
+.cs-btn--secondary:hover {
+  background: var(--cs-color-text);
+  color: #fff;
+}
+
+.cs-btn--text {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--cs-color-text);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--cs-color-text);
+  border-radius: 0;
+  padding-bottom: 0.2rem;
+}
+
+.cs-btn--text:hover {
+  opacity: 0.6;
+}
+
+/* Arrow for text links */
+.cs-btn--text::after {
+  content: '\2192';
+  margin-left: 0.5rem;
+  transition: transform var(--cs-transition);
+}
+
+.cs-btn--text:hover::after {
+  transform: translateX(4px);
+}
+
+/* ---------- Header refinements ---------- */
+.header {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+@media screen and (min-width: 990px) {
+  .header {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Thinner nav links */
+.header__inline-menu .list-menu__item--link {
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* ---------- Announcement bar refinement ---------- */
+.announcement-bar {
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Page width adjustments ---------- */
+@media screen and (min-width: 990px) {
+  .page-width {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* ---------- Card refinements ---------- */
+.card--standard .card__inner {
+  border-radius: 0;
+}
+
+.card__heading {
+  font-weight: 500;
+}
+
+/* ---------- Footer refinements ---------- */
+.footer {
+  border-top: 1px solid var(--cs-color-border);
+}
+
+.footer-block__heading {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.footer-block__details-content .list-menu__item--link {
+  font-size: 1.3rem;
+}
+
+/* ---------- Image treatments ---------- */
+.cs-image-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cs-image-rounded {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* ---------- Utility classes ---------- */
+.cs-text-center {
+  text-align: center;
+}
+
+.cs-mw-narrow {
+  max-width: var(--cs-max-width-narrow);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-mw-text {
+  max-width: var(--cs-max-width-text);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cs-fade-in {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.cs-fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for grid children */
+.cs-fade-in--stagger > *:nth-child(1) { transition-delay: 0s; }
+.cs-fade-in--stagger > *:nth-child(2) { transition-delay: 0.12s; }
+.cs-fade-in--stagger > *:nth-child(3) { transition-delay: 0.24s; }
+.cs-fade-in--stagger > *:nth-child(4) { transition-delay: 0.36s; }
+.cs-fade-in--stagger > *:nth-child(5) { transition-delay: 0.48s; }
+.cs-fade-in--stagger > *:nth-child(6) { transition-delay: 0.60s; }
+
+.cs-fade-in--stagger > * {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.cs-fade-in--stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Warm background sections ---------- */
+.cs-bg-warm {
+  background-color: var(--cs-color-warm-bg);
+}
+
+.cs-bg-warm-alt {
+  background-color: var(--cs-color-warm-bg-alt);
+}

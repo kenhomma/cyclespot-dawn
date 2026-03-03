@@ -1,0 +1,259 @@
+/* ==========================================================================
+   Hero Tagline — Split layout with typing animation
+   ========================================================================== */
+
+.section--hero-tagline {
+  margin-top: 0 !important;
+}
+
+.hero-tl {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--cs-color-warm-bg-alt, #f5f3ef);
+}
+
+/* ---------- Layout: mobile stack, desktop side-by-side ---------- */
+.hero-tl__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+@media screen and (min-width: 990px) {
+  .hero-tl__inner {
+    flex-direction: row;
+    min-height: 90vh;
+  }
+}
+
+/* ---------- Left: text area ---------- */
+.hero-tl__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem 2.4rem 4rem;
+  order: 2;
+}
+
+@media screen and (min-width: 750px) {
+  .hero-tl__text {
+    padding: 6rem 4rem 4rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hero-tl__text {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 8rem 6rem;
+    order: 1;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .hero-tl__text {
+    padding: 8rem 8rem 8rem 6rem;
+  }
+}
+
+.hero-tl__text-inner {
+  max-width: 48rem;
+}
+
+@media screen and (min-width: 990px) {
+  .hero-tl__text-inner {
+    margin-left: auto;
+  }
+}
+
+/* ---------- Tagline (main heading) ---------- */
+.hero-tl__tagline {
+  font-size: 2.6rem;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.03em;
+  color: var(--cs-color-text);
+  margin: 0 0 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .hero-tl__tagline {
+    font-size: 3.4rem;
+    margin-bottom: 2.4rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hero-tl__tagline {
+    font-size: 3.8rem;
+    margin-bottom: 2.8rem;
+  }
+}
+
+/* ---------- Sub copy ---------- */
+.hero-tl__subcopy {
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 1.9;
+  letter-spacing: 0.03em;
+  color: var(--cs-color-text-muted);
+  margin: 0 0 3.2rem;
+  white-space: pre-line;
+}
+
+@media screen and (min-width: 750px) {
+  .hero-tl__subcopy {
+    font-size: 1.5rem;
+    margin-bottom: 3.6rem;
+  }
+}
+
+/* ---------- Typing area ---------- */
+.hero-tl__typing-area {
+  margin-bottom: 3.2rem;
+}
+
+.hero-tl__typing-label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--cs-color-text-light, #999);
+  text-transform: uppercase;
+  margin: 0 0 0.8rem;
+}
+
+.hero-tl__typing-text {
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--cs-color-accent, #3a6b4c);
+  min-height: 3.2rem;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 750px) {
+  .hero-tl__typing-text {
+    font-size: 2rem;
+    min-height: 3.6rem;
+  }
+}
+
+/* Cursor blink */
+.hero-tl__cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: var(--cs-color-accent, #3a6b4c);
+  margin-left: 2px;
+  animation: hero-tl-blink 0.8s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes hero-tl-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ---------- Buttons ---------- */
+.hero-tl__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+/* ---------- Right: image area ---------- */
+.hero-tl__media {
+  position: relative;
+  order: 1;
+  min-height: 40vh;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 990px) {
+  .hero-tl__media {
+    flex: 0 0 50%;
+    max-width: 50%;
+    order: 2;
+    min-height: auto;
+  }
+}
+
+/* Image slides (stacked, crossfade) */
+.hero-tl__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 0;
+}
+
+.hero-tl__slide.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-tl__slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Placeholder when no images set */
+.hero-tl__media-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--cs-color-warm-bg) 0%, #ddd 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-tl__media-placeholder svg {
+  opacity: 0.15;
+}
+
+/* ---------- Progress indicator dots ---------- */
+.hero-tl__dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.8rem;
+  z-index: 2;
+}
+
+@media screen and (min-width: 990px) {
+  .hero-tl__dots {
+    bottom: 3rem;
+  }
+}
+
+.hero-tl__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-tl__dot.is-active {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-tl__slide {
+    transition: opacity 0.2s ease;
+  }
+  .hero-tl__cursor {
+    animation: none;
+    opacity: 1;
+  }
+}

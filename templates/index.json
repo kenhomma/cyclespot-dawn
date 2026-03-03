@@ -1,210 +1,269 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "hero-tagline",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "phrase_1": {
+          "type": "phrase",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "text": "パンク修理も、空気入れも、断りません。"
           }
         },
-        "text": {
-          "type": "text",
+        "phrase_2": {
+          "type": "phrase",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "text": "100店舗の整備士が、1台1台に向き合っています。"
           }
         },
-        "button": {
+        "phrase_3": {
+          "type": "phrase",
+          "settings": {
+            "text": "オンラインで選んで、近くの店舗で受け取れます。"
+          }
+        },
+        "phrase_4": {
+          "type": "phrase",
+          "settings": {
+            "text": "はじめての方も、気軽に立ち寄れるお店です。"
+          }
+        },
+        "buttons": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_label_1": "自転車を探す",
+            "button_link_1": "/collections",
+            "button_label_2": "お近くの店舗を探す",
+            "button_link_2": "/pages/stores"
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+      "block_order": ["phrase_1", "phrase_2", "phrase_3", "phrase_4", "buttons"],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "tagline": "できるかぎり、できることを。",
+        "subcopy": "街の自転車屋として、暮らしのそばで走り続ける。\n首都圏100店舗以上のサイクルスポットです。",
+        "typing_label": "CYCLESPOT IS"
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "strengths": {
+      "type": "strengths-cyclespot",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "human": {
+          "type": "strength",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
-      }
-    },
-    "collage": {
-      "type": "collage",
-      "blocks": {
-        "collection-0": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
+            "title": "人間力 — 断らない、寄りそう",
+            "text": "困ったらまず来てください。パンク修理も、空気入れも、ちょっとした相談も。私たちは「断らない」をモットーに、一人ひとりのお客様に寄りそいます。",
+            "link_label": "スタッフの想いを見る",
+            "link": "/blogs/stories"
           }
         },
         "product": {
-          "type": "product",
+          "type": "strength",
           "settings": {
-            "product": "",
-            "second_image": false
+            "title": "商品力 — 豊富なブランドとラインナップ",
+            "text": "ブリヂストン、パナソニック、ヤマハなどの国内メーカーから、GIANT、Bianchi などの海外ブランドまで。通勤通学、子ども乗せ、スポーツ、電動アシストと幅広くご提案。",
+            "link_label": "自転車を探す",
+            "link": "/collections"
           }
         },
-        "collection-1": {
-          "type": "collection",
+        "o2o": {
+          "type": "strength",
           "settings": {
-            "collection": ""
+            "title": "EC × 店舗 — 選んで、届いて、安心",
+            "text": "オンラインでじっくり選んで、お近くの店舗で受け取り。プロが最終調整してお渡しするから、届いたその日から安心して乗れます。",
+            "link_label": "店舗を探す",
+            "link": "/pages/stores"
           }
         }
       },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
+      "block_order": ["human", "product", "o2o"],
       "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "title": "サイクルスポットの3つの強み"
       }
     },
-    "video": {
-      "type": "video",
+    "fullbleed_1": {
+      "type": "fullbleed-image",
       "settings": {
+        "height_desktop": 45,
+        "height_mobile": 30,
+        "focal_point": "center center",
+        "overlay_opacity": 15,
         "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "subheading": "",
+        "button_label": "",
+        "button_link": ""
       }
     },
-    "multicolumn": {
-      "type": "multicolumn",
+    "categories": {
+      "type": "categories-cyclespot",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "col_ebikes": {
+          "type": "category",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "collection": "e-bikes",
+            "label": "電動アシスト自転車"
           }
         },
-        "column2": {
-          "type": "column",
+        "col_city": {
+          "type": "category",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "collection": "city-bikes",
+            "label": "通勤・通学"
           }
         },
-        "column3": {
-          "type": "column",
+        "col_sports": {
+          "type": "category",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "collection": "sports-bikes",
+            "label": "スポーツバイク"
+          }
+        },
+        "col_minivelo": {
+          "type": "category",
+          "settings": {
+            "collection": "mini-velo",
+            "label": "ミニベロ・小径車"
+          }
+        },
+        "col_kids": {
+          "type": "category",
+          "settings": {
+            "collection": "kids-bikes",
+            "label": "キッズ・ジュニア"
+          }
+        },
+        "col_keikai": {
+          "type": "category",
+          "settings": {
+            "collection": "keikai-bikes",
+            "label": "軽快車"
           }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "col_ebikes",
+        "col_city",
+        "col_sports",
+        "col_minivelo",
+        "col_kids",
+        "col_keikai"
       ],
       "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
+        "title": "カテゴリから探す",
+        "show_count": false
+      }
+    },
+    "pickup": {
+      "type": "pickup-cyclespot",
+      "settings": {
+        "title": "おすすめの自転車",
+        "collection": "all",
+        "products_to_show": 8,
+        "show_vendor": true,
+        "show_view_all": true,
+        "view_all_label": "すべて見る"
+      }
+    },
+    "fullbleed_2": {
+      "type": "fullbleed-image",
+      "settings": {
+        "height_desktop": 40,
+        "height_mobile": 30,
+        "focal_point": "center center",
+        "overlay_opacity": 10,
+        "heading": "",
+        "subheading": "",
         "button_label": "",
-        "button_link": "",
-        "swipe_on_mobile": false,
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "button_link": ""
+      }
+    },
+    "support_teaser": {
+      "type": "support-teaser",
+      "blocks": {
+        "repair": {
+          "type": "card",
+          "settings": {
+            "title": "修理・メンテナンス",
+            "text": "パンク修理からオーバーホールまで。プロの整備士が、1台1台丁寧に仕上げます。",
+            "link_label": "工賃表を見る",
+            "link": "/pages/repair-prices"
+          }
+        },
+        "beginner": {
+          "type": "card",
+          "settings": {
+            "title": "はじめての方へ",
+            "text": "空気入れだけでもお気軽にどうぞ。自転車屋さんがはじめての方も、安心してお越しください。",
+            "link_label": "はじめてガイド",
+            "link": "/pages/beginner-guide"
+          }
+        },
+        "guide": {
+          "type": "card",
+          "settings": {
+            "title": "選び方ガイド",
+            "text": "通勤通学、子ども乗せ、シニア。ライフステージに合わせて、スタッフが一緒に選びます。",
+            "link_label": "選び方ガイドへ",
+            "link": "/pages/guide"
+          }
+        }
+      },
+      "block_order": ["repair", "beginner", "guide"],
+      "settings": {
+        "title": "安心サポート",
+        "subtitle": "空気入れだけでもOK。他店購入車も歓迎。私たちは、自転車のある暮らしをずっと支えます。"
+      }
+    },
+    "stories_preview": {
+      "type": "stories-preview",
+      "blocks": {
+        "story1": {
+          "type": "story_link",
+          "settings": {
+            "title": "「自転車屋は関所にならなければいけない」— 森SV"
+          }
+        },
+        "story2": {
+          "type": "story_link",
+          "settings": {
+            "title": "「断らない」を貫く武蔵小山店の日常"
+          }
+        },
+        "story3": {
+          "type": "story_link",
+          "settings": {
+            "title": "創業者 高瀬が語る、自転車屋のはじまり"
+          }
+        }
+      },
+      "block_order": ["story1", "story2", "story3"],
+      "settings": {
+        "kicker": "STORIES",
+        "heading": "CYCLESPOT STORIES",
+        "text": "<p>「自転車屋は関所にならなければいけない」「修理は命に関わる」――<br>サイクルスポットのスタッフが語る、自転車と街と人のストーリー。</p>",
+        "button_label": "すべてのストーリーを読む",
+        "button_link": "/blogs/stories"
+      }
+    },
+    "store_cta": {
+      "type": "store-finder-cta",
+      "settings": {
+        "kicker": "STORES",
+        "heading": "お近くの店舗を探す",
+        "text": "首都圏100店舗以上。パンク修理も、ちょっとした相談も、お気軽にお越しください。",
+        "button_label": "店舗一覧を見る",
+        "button_link": "/pages/stores"
       }
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "hero",
+    "strengths",
+    "fullbleed_1",
+    "categories",
+    "pickup",
+    "fullbleed_2",
+    "support_teaser",
+    "stories_preview",
+    "store_cta"
   ]
 }

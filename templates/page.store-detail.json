@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "main": {
+      "type": "store-detail",
+      "settings": {
+        "show_services": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "service_1": {
+          "type": "service",
+          "settings": {
+            "service_name": "パンク修理",
+            "service_price": "¥1,100〜",
+            "service_note": "チューブ交換含む"
+          }
+        },
+        "service_2": {
+          "type": "service",
+          "settings": {
+            "service_name": "ブレーキ調整",
+            "service_price": "¥550〜",
+            "service_note": ""
+          }
+        },
+        "service_3": {
+          "type": "service",
+          "settings": {
+            "service_name": "チェーン交換",
+            "service_price": "¥2,200〜",
+            "service_note": "部品代込み"
+          }
+        },
+        "service_4": {
+          "type": "service",
+          "settings": {
+            "service_name": "タイヤ交換（前輪）",
+            "service_price": "¥3,300〜",
+            "service_note": "タイヤ・チューブ代込み"
+          }
+        },
+        "service_5": {
+          "type": "service",
+          "settings": {
+            "service_name": "タイヤ交換（後輪）",
+            "service_price": "¥4,400〜",
+            "service_note": "タイヤ・チューブ代込み"
+          }
+        },
+        "service_6": {
+          "type": "service",
+          "settings": {
+            "service_name": "点検・安全チェック",
+            "service_price": "¥1,100",
+            "service_note": ""
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "他店で購入した自転車も修理できますか？",
+            "answer": "<p>はい、他店でご購入の自転車も修理いたします。お気軽にお持ちください。</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "修理の待ち時間はどのくらいですか？",
+            "answer": "<p>パンク修理で約15〜30分、その他の修理は内容により異なります。混雑時はお預かりとなる場合があります。</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "混雑しやすい時間帯はありますか？",
+            "answer": "<p>土日祝日の午前中〜昼過ぎが混み合います。平日の午前中が比較的空いています。</p>"
+          }
+        }
+      },
+      "block_order": [
+        "service_1",
+        "service_2",
+        "service_3",
+        "service_4",
+        "service_5",
+        "service_6",
+        "faq_1",
+        "faq_2",
+        "faq_3"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

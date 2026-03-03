@@ -1,0 +1,146 @@
+{{ 'section-categories-cyclespot.css' | asset_url | stylesheet_tag }}
+
+<section class="categories-cs">
+  <div class="page-width">
+    <div class="cs-section-heading cs-fade-in">
+      <h2 class="cs-section-heading__title">{{ section.settings.title | default: 'カテゴリから探す' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="cs-section-heading__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="categories-cs__grid cs-fade-in cs-fade-in--stagger">
+      {%- for block in section.blocks -%}
+        {%- assign col = collections[block.settings.collection] -%}
+        {%- if col != blank -%}
+          <a href="{{ col.url }}" class="categories-cs__card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank or col.image != blank -%}
+              {%- assign card_image = block.settings.image | default: col.image -%}
+              <div class="categories-cs__card-image">
+                {{
+                  card_image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 450, 600, 800',
+                    sizes: '(min-width: 750px) 33vw, 50vw',
+                    class: 'categories-cs__card-img'
+                }}
+                <div class="categories-cs__card-body">
+                  <h3 class="categories-cs__card-title">{{ block.settings.label | default: col.title }}</h3>
+                  {%- if section.settings.show_count -%}
+                    <span class="categories-cs__card-count">{{ col.products_count }}{{ section.settings.count_suffix | default: '台' }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- else -%}
+              <div class="categories-cs__card-placeholder">
+                <div class="categories-cs__card-body">
+                  <h3 class="categories-cs__card-title">{{ block.settings.label | default: col.title }}</h3>
+                  {%- if section.settings.show_count -%}
+                    <span class="categories-cs__card-count">{{ col.products_count }}{{ section.settings.count_suffix | default: '台' }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </a>
+        {%- elsif block.settings.label != blank -%}
+          {%- comment -%} コレクション未設定でもラベルがあれば表示 {%- endcomment -%}
+          <div class="categories-cs__card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="categories-cs__card-image">
+                {{
+                  block.settings.image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 450, 600, 800',
+                    sizes: '(min-width: 750px) 33vw, 50vw',
+                    class: 'categories-cs__card-img'
+                }}
+                <div class="categories-cs__card-body">
+                  <h3 class="categories-cs__card-title">{{ block.settings.label }}</h3>
+                </div>
+              </div>
+            {%- else -%}
+              <div class="categories-cs__card-placeholder">
+                <div class="categories-cs__card-body">
+                  <h3 class="categories-cs__card-title">{{ block.settings.label }}</h3>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "カテゴリグリッド（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル",
+      "default": "カテゴリから探す"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "サブテキスト"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "商品数を表示",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "count_suffix",
+      "label": "商品数の単位",
+      "default": "台"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "カテゴリ",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "コレクション"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "表示ラベル（空ならコレクション名）"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "カスタム画像（空ならコレクション画像）"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "カテゴリグリッド（CS）",
+      "blocks": [
+        { "type": "category", "settings": { "label": "電動アシスト" } },
+        { "type": "category", "settings": { "label": "シティサイクル" } },
+        { "type": "category", "settings": { "label": "スポーツ" } },
+        { "type": "category", "settings": { "label": "小径車・ミニベロ" } },
+        { "type": "category", "settings": { "label": "キッズ" } },
+        { "type": "category", "settings": { "label": "軽快車" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

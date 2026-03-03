@@ -1,0 +1,229 @@
+/* Stories landing page */
+.stories-landing {
+  padding: 6rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .stories-landing {
+    padding: 8rem 0;
+  }
+}
+
+/* Intro */
+.stories-landing__intro {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.stories-landing__kicker {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cs-color-text-light);
+  margin: 0 0 1.6rem;
+}
+
+.stories-landing__title {
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 0 0 1.6rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .stories-landing__title {
+    font-size: 4rem;
+  }
+}
+
+.stories-landing__title::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 1px;
+  background: var(--cs-color-text);
+  margin: 2rem auto 0;
+}
+
+.stories-landing__subtitle {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 2rem auto 0;
+  max-width: var(--cs-max-width-text);
+}
+
+/* Featured stories */
+.stories-landing__featured {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .stories-landing__featured {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+  }
+}
+
+.stories-landing__featured-card {
+  text-decoration: none;
+  color: var(--cs-color-text);
+  display: block;
+}
+
+.stories-landing__featured-image {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.stories-landing__featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.stories-landing__featured-card:hover .stories-landing__featured-img {
+  transform: scale(1.03);
+}
+
+.stories-landing__category {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cs-color-accent);
+  margin-bottom: 0.8rem;
+}
+
+.stories-landing__featured-title {
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .stories-landing__featured-title {
+    font-size: 2.2rem;
+  }
+}
+
+.stories-landing__featured-excerpt {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 0 0 1.2rem;
+}
+
+.stories-landing__read-more {
+  font-size: 1.3rem;
+  color: var(--cs-color-text);
+  transition: color 0.2s;
+}
+
+.stories-landing__featured-card:hover .stories-landing__read-more {
+  color: var(--cs-color-accent);
+}
+
+/* Section heading */
+.stories-landing__section-heading {
+  margin-bottom: 4rem;
+}
+
+/* Grid */
+.stories-landing__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-bottom: 6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .stories-landing__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .stories-landing__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.stories-landing__card {
+  text-decoration: none;
+  color: var(--cs-color-text);
+  display: block;
+}
+
+.stories-landing__card-image {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  margin-bottom: 1.6rem;
+}
+
+.stories-landing__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.stories-landing__card:hover .stories-landing__card-img {
+  transform: scale(1.03);
+}
+
+.stories-landing__card-date {
+  font-size: 1.2rem;
+  color: var(--cs-color-text-light);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.stories-landing__card-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0 0 0.8rem;
+}
+
+.stories-landing__card-excerpt {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: var(--cs-color-text-muted);
+  margin: 0;
+}
+
+/* 10 Promises banner */
+.stories-landing__promises {
+  border-top: 1px solid var(--cs-color-border);
+  padding-top: 6rem;
+}
+
+.stories-landing__promises-inner {
+  text-align: center;
+  max-width: var(--cs-max-width-text);
+  margin: 0 auto;
+}
+
+.stories-landing__promises-heading {
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin: 0 0 1.6rem;
+}
+
+.stories-landing__promises-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 0 0 3rem;
+}

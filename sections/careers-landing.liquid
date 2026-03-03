@@ -1,0 +1,362 @@
+{{ 'section-careers-landing.css' | asset_url | stylesheet_tag }}
+
+<section class="careers">
+  <div class="page-width">
+
+    {%- comment -%} ===== Intro ===== {%- endcomment -%}
+    <div class="careers__intro cs-fade-in">
+      {%- if section.settings.kicker != blank -%}
+        <p class="careers__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      <h1 class="careers__title">{{ section.settings.title | default: '採用情報' }}</h1>
+      {%- if section.settings.lead != blank -%}
+        <p class="careers__lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== 代表メッセージ ===== {%- endcomment -%}
+    {%- assign message_blocks = section.blocks | where: 'type', 'message' -%}
+    {%- for block in message_blocks -%}
+      <div class="careers__message cs-fade-in" {{ block.shopify_attributes }}>
+        {%- if block.settings.heading != blank -%}
+          <h2 class="careers__message-heading">{{ block.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if block.settings.body != blank -%}
+          <div class="careers__message-body rte">
+            {{ block.settings.body }}
+          </div>
+        {%- endif -%}
+        {%- if block.settings.author != blank -%}
+          <p class="careers__message-author">{{ block.settings.author }}</p>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+
+    {%- comment -%} ===== 仕事内容紹介 ===== {%- endcomment -%}
+    {%- assign job_blocks = section.blocks | where: 'type', 'job' -%}
+    {%- if job_blocks.size > 0 -%}
+      <div class="careers__section">
+        <h2 class="careers__section-title">{{ section.settings.jobs_heading | default: '仕事を知る' }}</h2>
+        <div class="careers__jobs-grid cs-fade-in cs-fade-in--stagger">
+          {%- for block in job_blocks -%}
+            <div class="careers__job-card" {{ block.shopify_attributes }}>
+              <h3 class="careers__job-title">{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}
+                <p class="careers__job-text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== 人を知る（ストーリーリンク） ===== {%- endcomment -%}
+    {%- assign person_blocks = section.blocks | where: 'type', 'person' -%}
+    {%- if person_blocks.size > 0 -%}
+      <div class="careers__section">
+        <h2 class="careers__section-title">{{ section.settings.people_heading | default: '人を知る' }}</h2>
+        <div class="careers__people-grid cs-fade-in cs-fade-in--stagger">
+          {%- for block in person_blocks -%}
+            <a href="{{ block.settings.url }}" class="careers__person-card" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <div class="careers__person-image">
+                  {{
+                    block.settings.image
+                    | image_url: width: 600
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '300, 450, 600',
+                      sizes: '(min-width: 750px) 33vw, 100vw',
+                      class: 'careers__person-img'
+                  }}
+                </div>
+              {%- else -%}
+                <div class="careers__person-image"></div>
+              {%- endif -%}
+              {%- if block.settings.role != blank -%}
+                <span class="careers__person-role">{{ block.settings.role }}</span>
+              {%- endif -%}
+              <h3 class="careers__person-name">{{ block.settings.name }}</h3>
+              {%- if block.settings.excerpt != blank -%}
+                <p class="careers__person-excerpt">{{ block.settings.excerpt }}</p>
+              {%- endif -%}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== 求める人物像 ===== {%- endcomment -%}
+    {%- assign value_blocks = section.blocks | where: 'type', 'value' -%}
+    {%- if value_blocks.size > 0 -%}
+      <div class="careers__section">
+        <h2 class="careers__section-title">{{ section.settings.values_heading | default: '求める人物像' }}</h2>
+        <div class="careers__values-grid cs-fade-in cs-fade-in--stagger">
+          {%- for block in value_blocks -%}
+            <div class="careers__value-item" {{ block.shopify_attributes }}>
+              <div class="careers__value-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <div>
+                <h3 class="careers__value-title">{{ block.settings.title }}</h3>
+                {%- if block.settings.text != blank -%}
+                  <p class="careers__value-text">{{ block.settings.text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ===== CTA ===== {%- endcomment -%}
+    {%- if section.settings.cta_heading != blank -%}
+      <div class="careers__cta cs-fade-in">
+        <h2 class="careers__cta-heading">{{ section.settings.cta_heading }}</h2>
+        {%- if section.settings.cta_text != blank -%}
+          <p class="careers__cta-text">{{ section.settings.cta_text }}</p>
+        {%- endif -%}
+        {%- if section.settings.cta_label != blank -%}
+          <a href="{{ section.settings.cta_link }}" class="cs-btn cs-btn--primary">
+            {{ section.settings.cta_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "採用ページ（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "キッカー",
+      "default": "CAREERS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル",
+      "default": "採用情報"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "リード文",
+      "default": "街の自転車屋として、人の役に立つ仕事を一緒に。"
+    },
+    {
+      "type": "header",
+      "content": "セクション見出し"
+    },
+    {
+      "type": "text",
+      "id": "jobs_heading",
+      "label": "仕事紹介セクション見出し",
+      "default": "仕事を知る"
+    },
+    {
+      "type": "text",
+      "id": "people_heading",
+      "label": "人を知るセクション見出し",
+      "default": "人を知る"
+    },
+    {
+      "type": "text",
+      "id": "values_heading",
+      "label": "求める人物像セクション見出し",
+      "default": "求める人物像"
+    },
+    {
+      "type": "header",
+      "content": "CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA見出し",
+      "default": "エントリーはこちら"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "CTAテキスト",
+      "default": "ご応募・ご質問はお気軽にお問い合わせください。"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTAボタンラベル",
+      "default": "応募する"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTAボタンリンク"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "代表メッセージ",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "見出し",
+          "default": "「断らない」仲間を、探しています。"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "メッセージ本文"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "署名",
+          "default": "代表取締役社長 加藤京子"
+        }
+      ]
+    },
+    {
+      "type": "job",
+      "name": "仕事紹介",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "職種名",
+          "default": "メカニック"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明"
+        }
+      ]
+    },
+    {
+      "type": "person",
+      "name": "スタッフ紹介",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "名前",
+          "default": "スタッフ名"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "役職・肩書",
+          "default": "SV"
+        },
+        {
+          "type": "textarea",
+          "id": "excerpt",
+          "label": "ひとこと紹介"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "写真"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "ストーリーページリンク"
+        }
+      ]
+    },
+    {
+      "type": "value",
+      "name": "求める人物像",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "タイトル",
+          "default": "断らない人"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "説明"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "採用ページ（CS）",
+      "blocks": [
+        {
+          "type": "message",
+          "settings": {
+            "heading": "「断らない」仲間を、探しています。",
+            "body": "<p>私たちサイクルスポットは、首都圏100店舗以上の「街の自転車屋さん」です。お客様の「困った」に応え続けて、ここまで来ました。</p><p>大切にしているのは、技術力だけではありません。「この人に会えてよかった」と思ってもらえるような、人としての力。それが私たちの一番の強みです。</p>",
+            "author": "代表取締役社長 加藤京子"
+          }
+        },
+        {
+          "type": "job",
+          "settings": {
+            "title": "メカニック（自転車整備士）",
+            "text": "パンク修理からオーバーホールまで。お客様の命を乗せる自転車を、一台一台責任を持って仕上げます。"
+          }
+        },
+        {
+          "type": "job",
+          "settings": {
+            "title": "販売スタッフ",
+            "text": "自転車選びのご相談から、お渡し後のフォローまで。お客様の暮らしに寄りそう提案を。"
+          }
+        },
+        {
+          "type": "job",
+          "settings": {
+            "title": "SV（スーパーバイザー）",
+            "text": "複数店舗を統括し、スタッフの成長をサポート。チームで地域に根差したお店づくりを。"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "断らない人",
+            "text": "お客様の「困った」に、まず「やってみます」と言える姿勢を大切にしています。"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "人が好きな人",
+            "text": "技術も大事ですが、まずは人と話すこと、笑顔で接することが好きな人。"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "手を動かすのが好きな人",
+            "text": "自転車の修理・組み立て。ものづくりの楽しさを感じられる人を歓迎します。"
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "チームで助け合える人",
+            "text": "一人ではなく、仲間と一緒に。困っている人に手を差し伸べられる人。"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

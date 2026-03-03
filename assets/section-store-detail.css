@@ -1,0 +1,750 @@
+/* ===== Header ===== */
+.store-detail__header {
+  margin-bottom: 3rem;
+}
+
+.store-detail__header-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.store-detail__badge {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.store-detail__badge--cyclespot {
+  background: #e8f4e8;
+  color: #2d7d2d;
+}
+
+.store-detail__badge--lecyc {
+  background: #e8ecf4;
+  color: #2d4a7d;
+}
+
+.store-detail__status {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.store-detail__status--open {
+  background: #f0faf0;
+  color: #1a6b1a;
+}
+
+.store-detail__name {
+  margin: 0;
+}
+
+/* ===== Info Grid (2 col on desktop) ===== */
+.store-detail__info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+@media screen and (min-width: 750px) {
+  .store-detail__info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.store-detail__info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.store-detail__info-table th,
+.store-detail__info-table td {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  text-align: left;
+  vertical-align: top;
+  font-size: 1.4rem;
+}
+
+.store-detail__info-table th {
+  width: 30%;
+  font-weight: 600;
+  color: rgba(var(--color-foreground), 0.7);
+  white-space: nowrap;
+}
+
+.store-detail__info-table td a {
+  color: rgb(var(--color-foreground));
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.store-detail__map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.store-detail__map iframe {
+  width: 100%;
+  min-height: 250px;
+}
+
+@media screen and (min-width: 750px) {
+  .store-detail__map iframe {
+    min-height: 300px;
+  }
+}
+
+/* ===== Section titles ===== */
+.store-detail__section {
+  margin-bottom: 4rem;
+}
+
+.store-detail__section-title {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(var(--color-foreground), 0.1);
+}
+
+/* ===== About / Description ===== */
+.store-detail__about-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .store-detail__about-content {
+    grid-template-columns: 280px 1fr;
+  }
+}
+
+.store-detail__about-image img {
+  aspect-ratio: 3 / 2;
+}
+
+.store-detail__about-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+/* ===== Inventory ===== */
+.store-detail__inventory-count {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: rgba(var(--color-foreground), 0.5);
+  margin-left: 0.5rem;
+}
+
+.store-detail__inventory-updated {
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.45);
+  margin: -1.5rem 0 2rem;
+}
+
+.store-detail__inventory-category {
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 8px;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+}
+
+.store-detail__inventory-category-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 1.6rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(var(--color-foreground), 0.02);
+  list-style: none;
+  transition: background 0.15s;
+}
+
+.store-detail__inventory-category-title:hover {
+  background: rgba(var(--color-foreground), 0.04);
+}
+
+.store-detail__inventory-category-title::after {
+  content: '+';
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(var(--color-foreground), 0.4);
+  transition: transform 0.2s;
+}
+
+.store-detail__inventory-category[open] > .store-detail__inventory-category-title::after {
+  content: '\2212';
+}
+
+.store-detail__inventory-cat-count {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: rgba(var(--color-foreground), 0.5);
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.store-detail__inventory-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: rgba(var(--color-foreground), 0.06);
+  border-top: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+@media screen and (min-width: 750px) {
+  .store-detail__inventory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .store-detail__inventory-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.store-detail__inventory-card {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  background: rgb(var(--color-background));
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  transition: background 0.15s;
+  align-items: flex-start;
+}
+
+.store-detail__inventory-card:hover {
+  background: rgba(var(--color-foreground), 0.02);
+}
+
+.store-detail__inventory-card-image {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: rgba(var(--color-foreground), 0.03);
+}
+
+.store-detail__inventory-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media screen and (min-width: 750px) {
+  .store-detail__inventory-card-image {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+.store-detail__inventory-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.store-detail__inventory-card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem;
+  line-height: 1.4;
+}
+
+.store-detail__inventory-card-price {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-feature-settings: "tnum";
+}
+
+.store-detail__inventory-variants {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+}
+
+.store-detail__inventory-variants li {
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.65);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.store-detail__inventory-color {
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+.store-detail__inventory-qty {
+  font-weight: 600;
+  color: #2d7d2d;
+}
+
+/* ===== Staff grid ===== */
+.store-detail__staff-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+}
+
+@media screen and (min-width: 750px) {
+  .store-detail__staff-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .store-detail__staff-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.store-detail__staff-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.6rem;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 8px;
+  transition: box-shadow 0.2s;
+}
+
+.store-detail__staff-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.store-detail__staff-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  flex-shrink: 0;
+}
+
+.store-detail__staff-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.store-detail__staff-photo--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--color-foreground), 0.05);
+  color: rgba(var(--color-foreground), 0.3);
+}
+
+.store-detail__staff-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.store-detail__staff-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.store-detail__staff-role {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.store-detail__staff-expertise {
+  display: inline-block;
+  font-size: 1.2rem;
+  padding: 0.2rem 0.8rem;
+  background: #e8f4e8;
+  color: #2d7d2d;
+  border-radius: 4px;
+  margin: 0.4rem auto;
+}
+
+.store-detail__staff-comment {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.75);
+  margin: 0.6rem 0 0;
+}
+
+.store-detail__staff-story-link {
+  display: inline-block;
+  font-size: 1.3rem;
+  color: #2d6b7d;
+  text-decoration: none;
+  margin-top: 0.8rem;
+  transition: color 0.2s;
+}
+
+.store-detail__staff-story-link:hover {
+  color: #1a4a5a;
+  text-decoration: underline;
+}
+
+/* ===== Services grid ===== */
+.store-detail__services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .store-detail__services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .store-detail__services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.store-detail__service-card {
+  padding: 1.6rem;
+  border: 1px solid rgba(var(--color-foreground), 0.1);
+  border-radius: 8px;
+}
+
+.store-detail__service-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+}
+
+.store-detail__service-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
+  margin: 0;
+}
+
+.store-detail__service-note {
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.6);
+  margin: 0.4rem 0 0;
+}
+
+/* ===== FAQ ===== */
+.store-detail__faq {
+  border-top: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+.store-detail__faq-item {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+.store-detail__faq-question {
+  padding: 1.6rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.store-detail__faq-question::after {
+  content: '+';
+  font-size: 2rem;
+  font-weight: 300;
+  transition: transform 0.2s ease;
+}
+
+.store-detail__faq-item[open] .store-detail__faq-question::after {
+  content: '−';
+}
+
+.store-detail__faq-answer {
+  padding: 0 0 1.6rem;
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.75);
+  line-height: 1.7;
+}
+
+/* ===== Back link ===== */
+.store-detail__back {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+.store-detail__back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(var(--color-foreground), 0.7);
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: color 0.2s ease;
+}
+
+.store-detail__back-link:hover {
+  color: rgb(var(--color-foreground));
+}
+
+/* ===== Repair Prices ===== */
+.repair-prices {
+  margin-bottom: 4rem;
+}
+
+.repair-prices__lead {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: rgba(var(--color-foreground), 0.7);
+  margin-bottom: 2rem;
+}
+
+/* Tabs */
+.repair-prices__tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid rgba(var(--color-foreground), 0.1);
+  margin-bottom: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.repair-prices__tab {
+  flex: 1;
+  padding: 1.2rem 1.6rem;
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: rgba(var(--color-foreground), 0.5);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  text-align: center;
+}
+
+.repair-prices__tab:hover {
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.repair-prices__tab.active {
+  color: rgb(var(--color-foreground));
+  border-bottom-color: #2d7d2d;
+}
+
+/* Panels */
+.repair-prices__panel {
+  display: none;
+  padding-top: 2rem;
+}
+
+.repair-prices__panel.active {
+  display: block;
+}
+
+/* Table */
+.repair-prices__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.repair-prices__table thead th {
+  padding: 1rem 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: #3a3a3a;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.repair-prices__th-item {
+  width: 40%;
+}
+
+.repair-prices__th-note {
+  width: 35%;
+}
+
+.repair-prices__th-price {
+  width: 25%;
+  text-align: right !important;
+}
+
+.repair-prices__table tbody tr {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.06);
+  transition: background 0.15s;
+}
+
+.repair-prices__table tbody tr:hover {
+  background: rgba(var(--color-foreground), 0.02);
+}
+
+.repair-prices__table tbody tr:nth-child(even) {
+  background: rgba(var(--color-foreground), 0.015);
+}
+
+.repair-prices__table tbody tr:nth-child(even):hover {
+  background: rgba(var(--color-foreground), 0.035);
+}
+
+.repair-prices__group-start {
+  border-top: 2px solid rgba(var(--color-foreground), 0.08) !important;
+}
+
+.repair-prices__table tbody td {
+  padding: 1rem 1.2rem;
+  font-size: 1.4rem;
+  vertical-align: middle;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+.repair-prices__table tbody td:first-child {
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.repair-prices__table tbody td:nth-child(2) {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+.repair-prices__price {
+  text-align: right;
+  font-weight: 700;
+  font-size: 1.5rem !important;
+  color: rgb(var(--color-foreground)) !important;
+  white-space: nowrap;
+  font-feature-settings: "tnum";
+}
+
+/* Sub heading (引取・点検 panel) */
+.repair-prices__sub-heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+}
+
+.repair-prices__sub-heading:first-child {
+  margin-top: 0;
+}
+
+/* Note box */
+.repair-prices__note-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1.2rem 1.6rem;
+  background: #f0f7f0;
+  border-radius: 8px;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.75);
+  margin-bottom: 1.5rem;
+}
+
+.repair-prices__note-box svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #2d7d2d;
+}
+
+/* Highlight (スポットメイト) */
+.repair-prices__highlight {
+  display: inline-block;
+  background: #e8f4e8;
+  color: #2d7d2d;
+  padding: 0.1rem 0.6rem;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Footer notes */
+.repair-prices__footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(var(--color-foreground), 0.08);
+}
+
+.repair-prices__footer p {
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.5);
+  margin: 0.3rem 0;
+  line-height: 1.6;
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 749px) {
+  .repair-prices__table thead {
+    display: none;
+  }
+
+  .repair-prices__table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  .repair-prices__table tbody td {
+    padding: 0.2rem 0;
+    border: none;
+  }
+
+  .repair-prices__table tbody td:first-child {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.4rem;
+  }
+
+  .repair-prices__table tbody td:nth-child(2) {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 1.2rem;
+  }
+
+  .repair-prices__table tbody td:nth-child(2):empty {
+    display: none;
+  }
+
+  .repair-prices__price {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
+
+  .repair-prices__tab {
+    padding: 1rem 1.2rem;
+    font-size: 1.3rem;
+  }
+}

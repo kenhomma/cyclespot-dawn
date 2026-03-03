@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog-news",
+      "settings": {
+        "kicker": "NEWS",
+        "articles_per_page": 15,
+        "show_tags": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,275 @@
+{{ 'section-about-company.css' | asset_url | stylesheet_tag }}
+
+<section class="about-company">
+  <div class="page-width">
+    {%- comment -%} ===== ヘッダー ===== {%- endcomment -%}
+    <div class="about-company__intro cs-fade-in">
+      {%- if section.settings.kicker != blank -%}
+        <p class="about-company__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      <h1 class="about-company__title">{{ section.settings.title | default: '企業・ブランド情報' }}</h1>
+      {%- if section.settings.lead != blank -%}
+        <p class="about-company__lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== セクションブロック ===== {%- endcomment -%}
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+
+        {%- when 'vision' -%}
+          <div class="about-company__section cs-fade-in" {{ block.shopify_attributes }}>
+            <h2 class="about-company__section-title">{{ block.settings.heading | default: 'ビジョン' }}</h2>
+            <div class="about-company__vision-grid cs-fade-in cs-fade-in--stagger">
+              {%- if block.settings.purpose != blank -%}
+                <div class="about-company__vision-item">
+                  <h3 class="about-company__vision-label">Purpose</h3>
+                  <p class="about-company__vision-text">{{ block.settings.purpose }}</p>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.mission != blank -%}
+                <div class="about-company__vision-item">
+                  <h3 class="about-company__vision-label">Mission</h3>
+                  <p class="about-company__vision-text">{{ block.settings.mission }}</p>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.vision != blank -%}
+                <div class="about-company__vision-item">
+                  <h3 class="about-company__vision-label">Vision</h3>
+                  <p class="about-company__vision-text">{{ block.settings.vision }}</p>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.values != blank -%}
+                <div class="about-company__vision-item">
+                  <h3 class="about-company__vision-label">Values</h3>
+                  <p class="about-company__vision-text">{{ block.settings.values }}</p>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+        {%- when 'overview' -%}
+          <div class="about-company__section cs-fade-in" {{ block.shopify_attributes }}>
+            <h2 class="about-company__section-title">{{ block.settings.heading | default: '会社概要' }}</h2>
+            <table class="about-company__table">
+              {%- if block.settings.company_name != blank -%}
+                <tr><th>会社名</th><td>{{ block.settings.company_name }}</td></tr>
+              {%- endif -%}
+              {%- if block.settings.representative != blank -%}
+                <tr><th>代表者</th><td>{{ block.settings.representative }}</td></tr>
+              {%- endif -%}
+              {%- if block.settings.address != blank -%}
+                <tr><th>所在地</th><td>{{ block.settings.address }}</td></tr>
+              {%- endif -%}
+              {%- if block.settings.established != blank -%}
+                <tr><th>設立</th><td>{{ block.settings.established }}</td></tr>
+              {%- endif -%}
+              {%- if block.settings.business != blank -%}
+                <tr><th>事業内容</th><td>{{ block.settings.business }}</td></tr>
+              {%- endif -%}
+              {%- if block.settings.stores_count != blank -%}
+                <tr><th>店舗数</th><td>{{ block.settings.stores_count }}</td></tr>
+              {%- endif -%}
+            </table>
+          </div>
+
+        {%- when 'richtext' -%}
+          <div class="about-company__section cs-fade-in" {{ block.shopify_attributes }}>
+            {%- if block.settings.heading != blank -%}
+              <h2 class="about-company__section-title">{{ block.settings.heading }}</h2>
+            {%- endif -%}
+            <div class="about-company__richtext rte">
+              {{ block.settings.body }}
+            </div>
+          </div>
+
+        {%- when 'cta_banner' -%}
+          <div class="about-company__cta cs-fade-in" {{ block.shopify_attributes }}>
+            <h2 class="about-company__cta-heading">{{ block.settings.heading }}</h2>
+            {%- if block.settings.text != blank -%}
+              <p class="about-company__cta-text">{{ block.settings.text }}</p>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a href="{{ block.settings.button_link }}" class="cs-btn cs-btn--secondary">
+                {{ block.settings.button_label }}
+              </a>
+            {%- endif -%}
+          </div>
+
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "企業情報（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "キッカー",
+      "default": "ABOUT"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル",
+      "default": "企業・ブランド情報"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "リード文"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "vision",
+      "name": "ビジョン・MVV",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "見出し",
+          "default": "ビジョン"
+        },
+        {
+          "type": "textarea",
+          "id": "purpose",
+          "label": "Purpose（パーパス）"
+        },
+        {
+          "type": "textarea",
+          "id": "mission",
+          "label": "Mission（ミッション）"
+        },
+        {
+          "type": "textarea",
+          "id": "vision",
+          "label": "Vision（ビジョン）"
+        },
+        {
+          "type": "textarea",
+          "id": "values",
+          "label": "Values（バリュー）"
+        }
+      ]
+    },
+    {
+      "type": "overview",
+      "name": "会社概要",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "見出し",
+          "default": "会社概要"
+        },
+        {
+          "type": "text",
+          "id": "company_name",
+          "label": "会社名"
+        },
+        {
+          "type": "text",
+          "id": "representative",
+          "label": "代表者"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "所在地"
+        },
+        {
+          "type": "text",
+          "id": "established",
+          "label": "設立"
+        },
+        {
+          "type": "textarea",
+          "id": "business",
+          "label": "事業内容"
+        },
+        {
+          "type": "text",
+          "id": "stores_count",
+          "label": "店舗数"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "name": "リッチテキスト",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "見出し"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "本文"
+        }
+      ]
+    },
+    {
+      "type": "cta_banner",
+      "name": "CTAバナー",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "見出し",
+          "default": "一緒に働きませんか？"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "テキスト"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "ボタンラベル"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "ボタンリンク"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "企業情報（CS）",
+      "blocks": [
+        {
+          "type": "vision",
+          "settings": {
+            "heading": "ビジョン",
+            "purpose": "すべては「ありがとう」のために",
+            "mission": "自転車を通じて、人と街の暮らしを豊かにする",
+            "vision": "首都圏の街のインフラとして、いつでも頼れる自転車屋であり続ける"
+          }
+        },
+        {
+          "type": "overview",
+          "settings": {
+            "heading": "会社概要",
+            "company_name": "株式会社サイクルスポット",
+            "stores_count": "100店舗以上（首都圏）",
+            "business": "自転車の販売・修理・メンテナンス、ECサイト運営"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Blog Stories — CYCLESPOT STORIES 一覧ページ
+   stories-landing.css のカードデザインと統一
+   ========================================================================== */
+
+.blog-stories {
+  padding: 6rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .blog-stories {
+    padding: 8rem 0;
+  }
+}
+
+/* ---------- Intro ---------- */
+.blog-stories__intro {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.blog-stories__kicker {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--cs-color-text-light);
+  margin: 0 0 1.6rem;
+}
+
+.blog-stories__title {
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 0 0 1.6rem;
+  color: var(--cs-color-text);
+}
+
+@media screen and (min-width: 750px) {
+  .blog-stories__title {
+    font-size: 4rem;
+  }
+}
+
+.blog-stories__title::after {
+  content: '';
+  display: block;
+  width: 4rem;
+  height: 1px;
+  background: var(--cs-color-text);
+  margin: 2rem auto 0;
+}
+
+.blog-stories__subtitle {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 2rem auto 0;
+  max-width: var(--cs-max-width-text);
+}
+
+/* ---------- Tag Filter ---------- */
+.blog-stories__tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.blog-stories__tag {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.6rem 1.6rem;
+  border: 1px solid var(--cs-color-border);
+  color: var(--cs-color-text-muted);
+  text-decoration: none;
+  transition: all var(--cs-transition);
+}
+
+.blog-stories__tag:hover,
+.blog-stories__tag--active {
+  border-color: var(--cs-color-text);
+  color: var(--cs-color-text);
+}
+
+/* ---------- Article Grid ---------- */
+.blog-stories__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .blog-stories__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .blog-stories__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------- Card — matching stories-landing design ---------- */
+.blog-stories__card {
+  text-decoration: none;
+  color: var(--cs-color-text);
+  display: block;
+}
+
+.blog-stories__card-image {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  margin-bottom: 1.6rem;
+  background: var(--cs-color-warm-bg);
+}
+
+.blog-stories__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.blog-stories__card:hover .blog-stories__card-img {
+  transform: scale(1.03);
+}
+
+.blog-stories__card-date {
+  font-size: 1.2rem;
+  color: var(--cs-color-text-light);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.blog-stories__card-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0 0 0.8rem;
+}
+
+.blog-stories__card-excerpt {
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: var(--cs-color-text-muted);
+  margin: 0;
+}
+
+/* ---------- Pagination ---------- */
+.blog-stories__pagination {
+  margin-top: 6rem;
+}
+
+/* ---------- Promises Banner ---------- */
+.blog-stories__promises {
+  border-top: 1px solid var(--cs-color-border);
+  padding-top: 6rem;
+  margin-top: 6rem;
+}
+
+.blog-stories__promises-inner {
+  text-align: center;
+  max-width: var(--cs-max-width-text);
+  margin: 0 auto;
+}
+
+.blog-stories__promises-heading {
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin: 0 0 1.6rem;
+}
+
+.blog-stories__promises-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--cs-color-text-muted);
+  margin: 0 0 3rem;
+}
+
+/* ---------- Empty state ---------- */
+.blog-stories__empty {
+  text-align: center;
+  padding: 6rem 2rem;
+  color: var(--cs-color-text-muted);
+  font-size: 1.5rem;
+}

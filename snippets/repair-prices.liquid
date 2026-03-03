@@ -1,0 +1,307 @@
+{%- comment -%}
+  全店共通の修理・取り付け工賃表スニペット。
+  店舗詳細ページ (main-store-detail.liquid) から {% render 'repair-prices' %} で呼び出す。
+  データソース: docs/repair-prices.md
+{%- endcomment -%}
+
+<div class="repair-prices" id="repair-prices">
+  <h2 class="store-detail__section-title h2">修理・取り付け工賃表</h2>
+
+  <p class="repair-prices__lead">
+    修理をお受けする際に作業内容と料金を事前にご説明いたします。下記は参考価格です。車体の状態や使用する部品により変動する場合があります。
+  </p>
+
+  {%- comment -%} ===== カテゴリタブ ===== {%- endcomment -%}
+  <div class="repair-prices__tabs" role="tablist">
+    <button class="repair-prices__tab active" role="tab" aria-selected="true" data-target="tab-repair">修理工賃</button>
+    <button class="repair-prices__tab" role="tab" aria-selected="false" data-target="tab-install">取り付け工賃</button>
+    <button class="repair-prices__tab" role="tab" aria-selected="false" data-target="tab-other">引取・点検</button>
+  </div>
+
+  {%- comment -%} ===== 1. 修理工賃 ===== {%- endcomment -%}
+  <div class="repair-prices__panel active" id="tab-repair" role="tabpanel">
+    <table class="repair-prices__table">
+      <thead>
+        <tr>
+          <th class="repair-prices__th-item">修理項目</th>
+          <th class="repair-prices__th-note">備考</th>
+          <th class="repair-prices__th-price">税込価格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>パンク修理</td>
+          <td></td>
+          <td class="repair-prices__price">1,430円</td>
+        </tr>
+        <tr>
+          <td>水調べ</td>
+          <td>空気が抜ける原因の特定</td>
+          <td class="repair-prices__price">990円</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>チューブ交換（前輪）</td>
+          <td>一般車用。使用する商品で異なります</td>
+          <td class="repair-prices__price">3,850円〜</td>
+        </tr>
+        <tr>
+          <td>チューブ交換（後輪）</td>
+          <td>一般車用。使用する商品で異なります</td>
+          <td class="repair-prices__price">4,950円〜</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>タイヤ＆チューブ交換（前輪）</td>
+          <td>使用する商品で異なります</td>
+          <td class="repair-prices__price">5,500円〜</td>
+        </tr>
+        <tr>
+          <td>タイヤ＆チューブ交換（後輪）</td>
+          <td>使用する商品で異なります</td>
+          <td class="repair-prices__price">6,600円〜</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>ブレーキ調整</td>
+          <td></td>
+          <td class="repair-prices__price">880円</td>
+        </tr>
+        <tr>
+          <td>ブレーキゴム交換（一般）</td>
+          <td>種類により異なります</td>
+          <td class="repair-prices__price">1,760円〜</td>
+        </tr>
+        <tr>
+          <td>ブレーキワイヤー交換</td>
+          <td>一般</td>
+          <td class="repair-prices__price">2,750円〜</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>変速調整</td>
+          <td></td>
+          <td class="repair-prices__price">880円</td>
+        </tr>
+        <tr>
+          <td>シフトワイヤー交換</td>
+          <td>内装</td>
+          <td class="repair-prices__price">3,021円〜</td>
+        </tr>
+        <tr>
+          <td>シフトワイヤー交換</td>
+          <td>外装</td>
+          <td class="repair-prices__price">3,520円〜</td>
+        </tr>
+        <tr>
+          <td>シフトワイヤー交換</td>
+          <td>電動（内装）</td>
+          <td class="repair-prices__price">4,451円〜</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>油さし</td>
+          <td></td>
+          <td class="repair-prices__price">330円</td>
+        </tr>
+        <tr>
+          <td>チェーン調整</td>
+          <td></td>
+          <td class="repair-prices__price">880円</td>
+        </tr>
+        <tr>
+          <td>チェーン交換</td>
+          <td>使用する商品で異なります</td>
+          <td class="repair-prices__price">5,500円〜</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>電球交換</td>
+          <td></td>
+          <td class="repair-prices__price">660円〜</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {%- comment -%} ===== 2. 取り付け工賃 ===== {%- endcomment -%}
+  <div class="repair-prices__panel" id="tab-install" role="tabpanel" hidden>
+    <p class="repair-prices__note-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      新車ご購入時は取り付け無料です。お取り付けされる商品代は別途発生いたします。お持ち込み商品には別途お持ち込み料がかかります。
+    </p>
+    <table class="repair-prices__table">
+      <thead>
+        <tr>
+          <th class="repair-prices__th-item">取り付け項目</th>
+          <th class="repair-prices__th-note">備考</th>
+          <th class="repair-prices__th-price">税込価格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>チャイルドシート取り付け</td>
+          <td></td>
+          <td class="repair-prices__price">1,650円</td>
+        </tr>
+        <tr>
+          <td>チャイルドシートレインカバー取付</td>
+          <td></td>
+          <td class="repair-prices__price">1,980円</td>
+        </tr>
+        <tr>
+          <td>サイクルコンピューター取付</td>
+          <td>ワイヤード・ワイヤレス問わず</td>
+          <td class="repair-prices__price">1,320円</td>
+        </tr>
+        <tr>
+          <td>スマートフォンホルダ取付</td>
+          <td></td>
+          <td class="repair-prices__price">660円</td>
+        </tr>
+        <tr>
+          <td>グリップ交換</td>
+          <td></td>
+          <td class="repair-prices__price">880円</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>前カゴ取付・交換</td>
+          <td></td>
+          <td class="repair-prices__price">660円</td>
+        </tr>
+        <tr>
+          <td>後カゴ取付・交換</td>
+          <td></td>
+          <td class="repair-prices__price">660円</td>
+        </tr>
+        <tr>
+          <td>MTBバスケット取付</td>
+          <td></td>
+          <td class="repair-prices__price">2,200円</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>キャリア取付・交換</td>
+          <td>前後問わず</td>
+          <td class="repair-prices__price">880円</td>
+        </tr>
+        <tr>
+          <td>フェンダー取付・交換</td>
+          <td></td>
+          <td class="repair-prices__price">1,650円</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>鍵取付・交換</td>
+          <td>前鍵、ワイヤー錠台座含む</td>
+          <td class="repair-prices__price">660円</td>
+        </tr>
+        <tr>
+          <td>ブレーキ台座リング錠取付・交換</td>
+          <td></td>
+          <td class="repair-prices__price">1,100円</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>ペダル取付・交換</td>
+          <td></td>
+          <td class="repair-prices__price">1,100円</td>
+        </tr>
+        <tr>
+          <td>スタンド取付・交換</td>
+          <td></td>
+          <td class="repair-prices__price">880円</td>
+        </tr>
+        <tr>
+          <td>ダイナモライト交換</td>
+          <td></td>
+          <td class="repair-prices__price">660円</td>
+        </tr>
+        <tr class="repair-prices__group-start">
+          <td>サドル交換</td>
+          <td></td>
+          <td class="repair-prices__price">660円</td>
+        </tr>
+        <tr>
+          <td>シートポスト交換</td>
+          <td></td>
+          <td class="repair-prices__price">660円</td>
+        </tr>
+        <tr>
+          <td>サドル高さ調整</td>
+          <td></td>
+          <td class="repair-prices__price">220円</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {%- comment -%} ===== 3. 引取・点検 ===== {%- endcomment -%}
+  <div class="repair-prices__panel" id="tab-other" role="tabpanel" hidden>
+
+    <h3 class="repair-prices__sub-heading">自転車引取</h3>
+    <table class="repair-prices__table">
+      <thead>
+        <tr>
+          <th class="repair-prices__th-item">項目</th>
+          <th class="repair-prices__th-note">備考</th>
+          <th class="repair-prices__th-price">税込価格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>引取のみ</td>
+          <td></td>
+          <td class="repair-prices__price">1,650円</td>
+        </tr>
+        <tr>
+          <td>自転車お買い上げ時の引取</td>
+          <td>1台のみ</td>
+          <td class="repair-prices__price">550円</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 class="repair-prices__sub-heading">点検</h3>
+    <p class="repair-prices__note-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      部品交換が必要な場合には別途修繕費用が発生いたします。
+    </p>
+    <table class="repair-prices__table">
+      <thead>
+        <tr>
+          <th class="repair-prices__th-item">項目</th>
+          <th class="repair-prices__th-note">備考</th>
+          <th class="repair-prices__th-price">税込価格</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>一式点検</td>
+          <td><span class="repair-prices__highlight">スポットメイト加入者様</span></td>
+          <td class="repair-prices__price">550円</td>
+        </tr>
+        <tr>
+          <td>一式点検</td>
+          <td></td>
+          <td class="repair-prices__price">2,200円</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {%- comment -%} ===== 注意書き ===== {%- endcomment -%}
+  <div class="repair-prices__footer">
+    <p>※ 表示価格はすべて税込です。車体の状態・部品の種類・作業の複雑さにより変動する場合があります。</p>
+    <p>※ お持ち込み部品の取り付けには別途お持ち込み料がかかります。</p>
+    <p>※ 修理をお受けする際には必ず作業内容と概算料金を事前にご説明いたします。</p>
+  </div>
+</div>
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('.repair-prices__tab');
+  var panels = document.querySelectorAll('.repair-prices__panel');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach(function(p) { p.classList.remove('active'); p.hidden = true; });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      var target = document.getElementById(tab.getAttribute('data-target'));
+      if (target) { target.classList.add('active'); target.hidden = false; }
+    });
+  });
+})();
+</script>

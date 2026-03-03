@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "store-list",
+      "settings": {
+        "title": "店舗一覧",
+        "description": "お近くの店舗をお探しください。修理・メンテナンスもお気軽にご相談ください。",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

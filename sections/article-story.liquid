@@ -1,0 +1,194 @@
+{{ 'section-article-story.css' | asset_url | stylesheet_tag }}
+
+<article class="article-story" itemscope itemtype="http://schema.org/BlogPosting">
+
+  {%- comment -%} ===== Hero Image ===== {%- endcomment -%}
+  {%- if article.image -%}
+    <div class="article-story__hero">
+      <img
+        srcset="
+          {%- if article.image.width >= 375 -%}{{ article.image | image_url: width: 375 }} 375w,{%- endif -%}
+          {%- if article.image.width >= 750 -%}{{ article.image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if article.image.width >= 1100 -%}{{ article.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+          {%- if article.image.width >= 1500 -%}{{ article.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if article.image.width >= 2200 -%}{{ article.image | image_url: width: 2200 }} 2200w,{%- endif -%}
+          {{ article.image | image_url }} {{ article.image.width }}w
+        "
+        sizes="100vw"
+        src="{{ article.image | image_url: width: 1500 }}"
+        loading="eager"
+        fetchpriority="high"
+        width="{{ article.image.width }}"
+        height="{{ article.image.height }}"
+        alt="{{ article.image.alt | escape }}"
+        itemprop="image"
+      >
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== Header: Category / Story Number / Title / Date ===== {%- endcomment -%}
+  <header class="article-story__header cs-fade-in">
+    <div class="article-story__meta">
+      {%- comment -%} カテゴリをタグから取得（"category:" プレフィクス） {%- endcomment -%}
+      {%- for tag in article.tags -%}
+        {%- if tag contains 'category:' -%}
+          {%- assign category_label = tag | remove: 'category:' | strip -%}
+          <span class="article-story__category">{{ category_label }}</span>
+        {%- endif -%}
+        {%- if tag contains 'story:' -%}
+          {%- assign story_number = tag | remove: 'story:' | strip -%}
+          <span class="article-story__number">STORY {{ story_number }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <h1 class="article-story__title" itemprop="headline">{{ article.title | escape }}</h1>
+
+    {%- if section.settings.show_date -%}
+      <time class="article-story__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}" itemprop="datePublished">
+        {{ article.published_at | date: '%Y.%m.%d' }}
+      </time>
+    {%- endif -%}
+  </header>
+
+  {%- comment -%} ===== Lead text (excerpt) ===== {%- endcomment -%}
+  {%- if article.excerpt != blank and section.settings.show_excerpt -%}
+    <div class="article-story__lead cs-fade-in" itemprop="description">
+      {{ article.excerpt }}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== Content ===== {%- endcomment -%}
+  <div class="article-story__content rte" itemprop="articleBody">
+    {{ article.content }}
+  </div>
+
+  {%- comment -%} ===== Share ===== {%- endcomment -%}
+  {%- if section.settings.show_share -%}
+    <div class="article-story__share">
+      {%- assign share_url = request.origin | append: article.url -%}
+      {% render 'share-button', share_link: share_url %}
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ===== Related Stories ===== {%- endcomment -%}
+  {%- if section.settings.show_related -%}
+    {%- assign current_article_id = article.id -%}
+    {%- assign related_count = 0 -%}
+    {%- assign related_limit = 3 -%}
+
+    {%- comment -%} 同じブログから現在の記事を除いた最新記事を取得 {%- endcomment -%}
+    {%- assign related_articles = blog.articles -%}
+
+    {%- capture related_html -%}
+      {%- for related in related_articles limit: 6 -%}
+        {%- if related.id != current_article_id and related_count < related_limit -%}
+          {%- assign related_count = related_count | plus: 1 -%}
+          <a href="{{ related.url }}" class="article-story__related-card">
+            {%- if related.image -%}
+              <div class="article-story__related-card-image">
+                {{
+                  related.image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '300, 450, 600',
+                    sizes: '(min-width: 750px) 33vw, 100vw',
+                    class: 'article-story__related-card-img'
+                }}
+              </div>
+            {%- endif -%}
+            <div class="article-story__related-card-body">
+              <time class="article-story__related-card-date" datetime="{{ related.published_at | date: '%Y-%m-%d' }}">
+                {{ related.published_at | date: '%Y.%m.%d' }}
+              </time>
+              <h3 class="article-story__related-card-title">{{ related.title }}</h3>
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    {%- if related_count > 0 -%}
+      <div class="article-story__related">
+        <div class="page-width">
+          <div class="article-story__related-heading">
+            <h2>{{ section.settings.related_heading | default: '他のストーリーを読む' }}</h2>
+          </div>
+          <div class="article-story__related-grid cs-fade-in cs-fade-in--stagger">
+            {{ related_html }}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- comment -%} ===== Back to blog ===== {%- endcomment -%}
+  <div class="article-story__back">
+    <a href="{{ blog.url }}" class="article-story__back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 10" fill="none" aria-hidden="true">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor"/>
+      </svg>
+      {{ section.settings.back_label | default: 'ストーリー一覧へ' }}
+    </a>
+  </div>
+
+</article>
+
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "ストーリー記事（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "公開日を表示",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "リード文（excerpt）を表示",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share",
+      "label": "シェアボタンを表示",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "関連ストーリー"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_related",
+      "label": "関連ストーリーを表示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "related_heading",
+      "label": "関連ストーリー見出し",
+      "default": "他のストーリーを読む"
+    },
+    {
+      "type": "header",
+      "content": "戻るリンク"
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "戻るリンクテキスト",
+      "default": "ストーリー一覧へ"
+    }
+  ]
+}
+{% endschema %}
