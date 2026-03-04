@@ -240,6 +240,7 @@ async function main() {
   let created = 0;
   let skipped = 0;
   let errors = 0;
+  let imageRetries = 0;
   let processed = 0;
 
   const startPage = 1 + OFFSET_PAGES;
@@ -304,7 +305,19 @@ async function main() {
           articleData.image = { src: imageUrl, alt: title };
         }
 
-        await shopifyRest(`blogs/${NEWS_BLOG_ID}/articles.json`, 'POST', { article: articleData });
+        try {
+          await shopifyRest(`blogs/${NEWS_BLOG_ID}/articles.json`, 'POST', { article: articleData });
+        } catch (firstErr) {
+          // If image upload failed, retry without the image
+          const errMsg = (firstErr as Error).message;
+          if (imageUrl && errMsg.includes('Image upload failed')) {
+            delete articleData.image;
+            await shopifyRest(`blogs/${NEWS_BLOG_ID}/articles.json`, 'POST', { article: articleData });
+            imageRetries++;
+          } else {
+            throw firstErr;
+          }
+        }
         created++;
         existingHandles.add(handle);
         urlMap.push({ old_url: post.link, new_handle: handle, title });
@@ -348,7 +361,7 @@ async function main() {
     `- 対象: https://www.cyclespot.net/contents/`,
     `- 移植先ブログ: news (${DOMAIN})`,
     `- 処理件数: ${processed}`,
-    `- 作成: ${created}, スキップ(既存): ${skipped}, エラー: ${errors}`,
+    `- 作成: ${created}（うち画像なしリトライ: ${imageRetries}）, スキップ(既存): ${skipped}, エラー: ${errors}`,
     '',
     '## URL マッピング',
     '',
@@ -367,7 +380,7 @@ async function main() {
   writeFileSync(mdPath, mdLines.join('\n'), 'utf8');
 
   console.log(`\n========================`);
-  console.log(`✅ 完了: 作成 ${created}, スキップ ${skipped}, エラー ${errors}`);
+  console.log(`✅ 完了: 作成 ${created}（画像リトライ ${imageRetries}）, スキップ ${skipped}, エラー ${errors}`);
   console.log(`📄 URL対応表: ${csvPath}`);
   console.log(`📄 サマリ: ${mdPath}`);
 }
