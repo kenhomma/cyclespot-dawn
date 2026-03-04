@@ -40,7 +40,10 @@ body {
 
 .shopify-section:first-child,
 .shopify-section + .shopify-section--header,
-.section-header + .shopify-section {
+.section-header + .shopify-section,
+.shopify-section-group-header-group,
+.shopify-section.announcement-bar-section,
+.shopify-section.section-header {
   margin-top: 0;
 }
 

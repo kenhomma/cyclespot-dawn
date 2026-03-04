@@ -1,8 +1,8 @@
 (function () {
   'use strict';
 
-  function initHeroTagline(section) {
-    var container = section.querySelector('[data-hero-tagline]');
+  function initHeroTagline(el) {
+    var container = el.hasAttribute('data-hero-tagline') ? el : el.querySelector('[data-hero-tagline]');
     if (!container) return;
 
     var textEl = container.querySelector('[data-typing-text]');
