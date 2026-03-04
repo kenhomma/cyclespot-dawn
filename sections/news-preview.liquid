@@ -15,9 +15,15 @@
       <div class="news-preview__list cs-fade-in">
         {%- for article in news_blog.articles limit: section.settings.articles_to_show -%}
           <a href="{{ article.url }}" class="news-preview__item">
-            <time class="news-preview__item-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
-              {{ article.published_at | date: '%Y.%m.%d' }}
-            </time>
+            <div class="news-preview__item-thumb">
+              {%- if article.image -%}
+                {{ article.image | image_url: width: 240 | image_tag: loading: 'lazy', class: 'news-preview__item-thumb-img' }}
+              {%- else -%}
+                <div class="news-preview__item-thumb-placeholder">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+              {%- endif -%}
+            </div>
             <div class="news-preview__item-body">
               {%- if article.tags.size > 0 -%}
                 <div class="news-preview__item-tags">
