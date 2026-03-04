@@ -218,6 +218,26 @@ h3, .h3 {
   font-weight: 500;
 }
 
+/* Placeholder for products without images */
+.card__media-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  background: var(--cs-color-warm-bg, #faf9f7);
+}
+
+/* Pickup section placeholder */
+.pickup-cs__card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #ccc;
+  background: var(--cs-color-warm-bg, #faf9f7);
+}
+
 /* ---------- Footer refinements ---------- */
 .footer {
   border-top: 1px solid var(--cs-color-border);

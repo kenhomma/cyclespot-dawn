@@ -26,6 +26,10 @@
                     sizes: '(min-width: 750px) 25vw, 50vw',
                     class: 'pickup-cs__card-img'
                 }}
+              {%- else -%}
+                <div class="pickup-cs__card-placeholder">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8"><rect x="2" y="6" width="20" height="12" rx="1"/><circle cx="7" cy="15" r="2.5"/><circle cx="17" cy="15" r="2.5"/><line x1="9.5" y1="15" x2="14.5" y2="15"/><polyline points="4 12 8 9 12 12"/></svg>
+                </div>
               {%- endif -%}
             </div>
             {%- if section.settings.show_vendor and product.vendor != blank -%}
@@ -34,9 +38,9 @@
             <h3 class="pickup-cs__card-title">{{ product.title }}</h3>
             <div class="pickup-cs__card-price">
               {%- if product.compare_at_price > product.price -%}
-                <span class="pickup-cs__card-price--compare">{{ product.compare_at_price | money }}</span>
+                <span class="pickup-cs__card-price--compare">{{ product.compare_at_price | money_without_currency }}円</span>
               {%- endif -%}
-              {{ product.price | money }}
+              {{ product.price | money_without_currency }}円（税込）
             </div>
           </a>
         {%- endfor -%}
