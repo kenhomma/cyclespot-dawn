@@ -1,5 +1,7 @@
 {{ 'section-stories-preview.css' | asset_url | stylesheet_tag }}
 
+{%- assign stories_blog = blogs[section.settings.blog] -%}
+
 <section class="stories-preview">
   <div class="page-width">
     <div class="stories-preview__layout">
@@ -22,7 +24,7 @@
         {%- endif -%}
       </div>
 
-      {%- comment -%} 右：テキスト {%- endcomment -%}
+      {%- comment -%} 右：テキスト + 動的記事カード {%- endcomment -%}
       <div class="stories-preview__content cs-fade-in">
         {%- if section.settings.kicker != blank -%}
           <p class="stories-preview__kicker">{{ section.settings.kicker }}</p>
@@ -32,12 +34,35 @@
           {{ section.settings.text }}
         </div>
 
-        {%- comment -%} ストーリーカード {%- endcomment -%}
-        {%- if section.blocks.size > 0 -%}
+        {%- comment -%} 動的記事カード（ブログから取得） {%- endcomment -%}
+        {%- if stories_blog != blank and stories_blog.articles_count > 0 -%}
+          <div class="stories-preview__cards">
+            {%- for article in stories_blog.articles limit: section.settings.articles_to_show -%}
+              <a href="{{ article.url }}" class="stories-preview__card">
+                {%- if article.image -%}
+                  <div class="stories-preview__card-thumb">
+                    {{ article.image | image_url: width: 160 | image_tag: loading: 'lazy', class: 'stories-preview__card-thumb-img' }}
+                  </div>
+                {%- endif -%}
+                <div class="stories-preview__card-info">
+                  <time class="stories-preview__card-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                    {{ article.published_at | date: '%Y.%m.%d' }}
+                  </time>
+                  <span class="stories-preview__card-title">{{ article.title }}</span>
+                </div>
+                <span class="stories-preview__card-arrow">&rarr;</span>
+              </a>
+            {%- endfor -%}
+          </div>
+
+        {%- elsif section.blocks.size > 0 -%}
+          {%- comment -%} フォールバック：静的リンクブロック {%- endcomment -%}
           <div class="stories-preview__cards">
             {%- for block in section.blocks -%}
               <a href="{{ block.settings.url }}" class="stories-preview__card" {{ block.shopify_attributes }}>
-                <span class="stories-preview__card-title">{{ block.settings.title }}</span>
+                <div class="stories-preview__card-info">
+                  <span class="stories-preview__card-title">{{ block.settings.title }}</span>
+                </div>
                 <span class="stories-preview__card-arrow">&rarr;</span>
               </a>
             {%- endfor -%}
@@ -84,6 +109,20 @@
       "label": "画像"
     },
     {
+      "type": "blog",
+      "id": "blog",
+      "label": "ブログ（記事を自動取得）"
+    },
+    {
+      "type": "range",
+      "id": "articles_to_show",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "表示する記事数"
+    },
+    {
       "type": "text",
       "id": "button_label",
       "label": "ボタンラベル",
@@ -98,7 +137,7 @@
   "blocks": [
     {
       "type": "story_link",
-      "name": "ストーリーリンク",
+      "name": "ストーリーリンク（手動）",
       "settings": [
         {
           "type": "text",
@@ -117,26 +156,7 @@
   "presets": [
     {
       "name": "ストーリー紹介（CS）",
-      "blocks": [
-        {
-          "type": "story_link",
-          "settings": {
-            "title": "「自転車屋は関所にならなければいけない」— 森SV"
-          }
-        },
-        {
-          "type": "story_link",
-          "settings": {
-            "title": "「断らない」を貫く武蔵小山店の日常"
-          }
-        },
-        {
-          "type": "story_link",
-          "settings": {
-            "title": "創業者 高瀬が語る、自転車屋のはじまり"
-          }
-        }
-      ]
+      "blocks": []
     }
   ]
 }

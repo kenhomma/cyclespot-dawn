@@ -163,6 +163,31 @@
         "view_all_label": "すべて見る"
       }
     },
+    "stories_preview": {
+      "type": "stories-preview",
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "kicker": "STORIES",
+        "heading": "CYCLESPOT STORIES",
+        "text": "<p>「自転車屋は関所にならなければいけない」「修理は命に関わる」――<br>サイクルスポットのスタッフが語る、自転車と街と人のストーリー。</p>",
+        "blog": "stories",
+        "articles_to_show": 3,
+        "button_label": "すべてのストーリーを読む",
+        "button_link": "/blogs/stories"
+      }
+    },
+    "news_preview": {
+      "type": "news-preview",
+      "settings": {
+        "kicker": "NEWS",
+        "title": "お知らせ",
+        "blog": "news",
+        "articles_to_show": 5,
+        "show_view_all": true,
+        "view_all_label": "すべてのお知らせを見る"
+      }
+    },
     "fullbleed_2": {
       "type": "fullbleed-image",
       "settings": {
@@ -213,37 +238,6 @@
         "subtitle": "空気入れだけでもOK。他店購入車も歓迎。私たちは、自転車のある暮らしをずっと支えます。"
       }
     },
-    "stories_preview": {
-      "type": "stories-preview",
-      "blocks": {
-        "story1": {
-          "type": "story_link",
-          "settings": {
-            "title": "「自転車屋は関所にならなければいけない」— 森SV"
-          }
-        },
-        "story2": {
-          "type": "story_link",
-          "settings": {
-            "title": "「断らない」を貫く武蔵小山店の日常"
-          }
-        },
-        "story3": {
-          "type": "story_link",
-          "settings": {
-            "title": "創業者 高瀬が語る、自転車屋のはじまり"
-          }
-        }
-      },
-      "block_order": ["story1", "story2", "story3"],
-      "settings": {
-        "kicker": "STORIES",
-        "heading": "CYCLESPOT STORIES",
-        "text": "<p>「自転車屋は関所にならなければいけない」「修理は命に関わる」――<br>サイクルスポットのスタッフが語る、自転車と街と人のストーリー。</p>",
-        "button_label": "すべてのストーリーを読む",
-        "button_link": "/blogs/stories"
-      }
-    },
     "store_cta": {
       "type": "store-finder-cta",
       "settings": {
@@ -261,9 +255,10 @@
     "fullbleed_1",
     "categories",
     "pickup",
+    "stories_preview",
+    "news_preview",
     "fullbleed_2",
     "support_teaser",
-    "stories_preview",
     "store_cta"
   ]
 }

@@ -1,0 +1,103 @@
+{{ 'section-news-preview.css' | asset_url | stylesheet_tag }}
+
+{%- assign news_blog = blogs[section.settings.blog] -%}
+
+<section class="news-preview">
+  <div class="page-width">
+    <div class="cs-section-heading cs-fade-in">
+      {%- if section.settings.kicker != blank -%}
+        <p class="news-preview__kicker">{{ section.settings.kicker }}</p>
+      {%- endif -%}
+      <h2 class="cs-section-heading__title">{{ section.settings.title | default: 'お知らせ' }}</h2>
+    </div>
+
+    {%- if news_blog != blank and news_blog.articles_count > 0 -%}
+      <div class="news-preview__list cs-fade-in">
+        {%- for article in news_blog.articles limit: section.settings.articles_to_show -%}
+          <a href="{{ article.url }}" class="news-preview__item">
+            <time class="news-preview__item-date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+              {{ article.published_at | date: '%Y.%m.%d' }}
+            </time>
+            <div class="news-preview__item-body">
+              {%- if article.tags.size > 0 -%}
+                <div class="news-preview__item-tags">
+                  {%- for tag in article.tags limit: 2 -%}
+                    {%- unless tag contains 'category:' or tag contains 'story:' or tag contains '店舗:' -%}
+                      <span class="news-preview__item-tag">{{ tag }}</span>
+                    {%- endunless -%}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              <h3 class="news-preview__item-title">{{ article.title }}</h3>
+            </div>
+            <span class="news-preview__item-arrow">&rarr;</span>
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_view_all -%}
+        <div class="news-preview__view-all cs-fade-in">
+          <a href="{{ news_blog.url }}" class="cs-btn cs-btn--text">
+            {{ section.settings.view_all_label | default: 'すべてのお知らせを見る' }}
+          </a>
+        </div>
+      {%- endif -%}
+
+    {%- else -%}
+      <p class="news-preview__empty">お知らせはまだありません。</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "お知らせプレビュー（CS）",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "キッカー",
+      "default": "NEWS"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "タイトル",
+      "default": "お知らせ"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "ブログ"
+    },
+    {
+      "type": "range",
+      "id": "articles_to_show",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5,
+      "label": "表示する記事数"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "「すべて見る」リンクを表示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "リンクラベル",
+      "default": "すべてのお知らせを見る"
+    }
+  ],
+  "presets": [
+    {
+      "name": "お知らせプレビュー（CS）"
+    }
+  ]
+}
+{% endschema %}
