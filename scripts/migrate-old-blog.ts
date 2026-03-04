@@ -222,15 +222,15 @@ async function main() {
   // Step 2: Get existing Shopify articles to avoid duplicates
   const existingHandles = new Set<string>();
   if (!DRY_RUN) {
-    let shopifyPage = 1;
+    let sinceId = 0;
     let hasMore = true;
     while (hasMore) {
-      const data = await shopifyRest(`blogs/${NEWS_BLOG_ID}/articles.json?limit=250&page=${shopifyPage}`);
+      const data = await shopifyRest(`blogs/${NEWS_BLOG_ID}/articles.json?limit=250&since_id=${sinceId}&fields=id,handle`);
       for (const a of data.articles) {
         existingHandles.add(a.handle);
+        sinceId = Math.max(sinceId, a.id);
       }
       hasMore = data.articles.length === 250;
-      shopifyPage++;
     }
     console.log(`  Shopify 既存記事数: ${existingHandles.size}`);
   }
